@@ -10,6 +10,7 @@
 		134BCF2020EAD054001FC370 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF1F20EAD054001FC370 /* LoginViewController.swift */; };
 		134BCF2220EBD5FB001FC370 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF2120EBD5FB001FC370 /* MapViewController.swift */; };
 		134BCF2420EBD989001FC370 /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF2320EBD989001FC370 /* AddPinViewController.swift */; };
+		134BCF2820EC09FE001FC370 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF2720EC09FE001FC370 /* TableViewController.swift */; };
 		13AC601820DD7D4300D2C8C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AC601720DD7D4300D2C8C5 /* AppDelegate.swift */; };
 		13AC601D20DD7D4300D2C8C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13AC601B20DD7D4300D2C8C5 /* Main.storyboard */; };
 		13AC601F20DD7D4300D2C8C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13AC601E20DD7D4300D2C8C5 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 		134BCF1F20EAD054001FC370 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		134BCF2120EBD5FB001FC370 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		134BCF2320EBD989001FC370 /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
+		134BCF2720EC09FE001FC370 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		13AC601420DD7D4300D2C8C5 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13AC601720DD7D4300D2C8C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13AC601C20DD7D4300D2C8C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				134BCF2320EBD989001FC370 /* AddPinViewController.swift */,
 				134BCF1F20EAD054001FC370 /* LoginViewController.swift */,
 				134BCF2120EBD5FB001FC370 /* MapViewController.swift */,
+				134BCF2720EC09FE001FC370 /* TableViewController.swift */,
 				13AC601B20DD7D4300D2C8C5 /* Main.storyboard */,
 				13AC601E20DD7D4300D2C8C5 /* Assets.xcassets */,
 				13AC602020DD7D4300D2C8C5 /* LaunchScreen.storyboard */,
@@ -145,6 +148,7 @@
 				134BCF2420EBD989001FC370 /* AddPinViewController.swift in Sources */,
 				134BCF2020EAD054001FC370 /* LoginViewController.swift in Sources */,
 				134BCF2220EBD5FB001FC370 /* MapViewController.swift in Sources */,
+				134BCF2820EC09FE001FC370 /* TableViewController.swift in Sources */,
 				13AC601820DD7D4300D2C8C5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
