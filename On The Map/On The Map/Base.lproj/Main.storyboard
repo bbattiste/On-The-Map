@@ -110,32 +110,74 @@
                     <view key="view" contentMode="scaleToFill" id="jPE-oE-Cap">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="test table 6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20Z-5n-FJF">
+                                <rect key="frame" x="93" y="198" width="277" height="122"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="sG7-8D-RPP"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="nKF-tw-3x4"/>
-                    <navigationItem key="navigationItem" id="pnA-ln-LFY"/>
+                    <navigationItem key="navigationItem" title="On the Map" id="pnA-ln-LFY"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GVi-xV-qVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2502" y="511"/>
+            <point key="canvasLocation" x="2501.5999999999999" y="510.49475262368821"/>
+        </scene>
+        <!--Add Pin View Controller-->
+        <scene sceneID="BKO-u3-Het">
+            <objects>
+                <viewController storyboardIdentifier="AddPinStoryBoard" title="Add Pin View Controller" id="w8A-r8-VIH" customClass="AddPinViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lCB-0a-4NK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="test ADDPIN view" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcX-5W-cfW">
+                                <rect key="frame" x="166" y="286" width="189" height="248"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="XGf-iE-Nrf"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q4t-mC-mUk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3621.5999999999999" y="133.5832083958021"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="Qef-bL-FZk">
             <objects>
-                <viewController title="Map" id="JnP-Xu-m0r" userLabel="Map View Controller" sceneMemberID="viewController">
+                <viewController title="Map" id="JnP-Xu-m0r" userLabel="Map View Controller" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wYq-iS-qjw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="test map 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cM5-O3-JHh">
+                                <rect key="frame" x="166" y="323" width="147" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="Em9-1X-Hd5"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="jr6-nZ-B8h"/>
-                    <navigationItem key="navigationItem" id="fla-Q1-4GC"/>
+                    <navigationItem key="navigationItem" title="On the Map" id="fla-Q1-4GC"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1qT-VQ-dCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2503" y="-198"/>
+            <point key="canvasLocation" x="2501.5999999999999" y="-198.35082458770617"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Gss-ni-ibg">
