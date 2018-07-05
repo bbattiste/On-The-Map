@@ -13,9 +13,13 @@ class LoginViewController: UIViewController {
 
     // MARK: Outlets and variables
     @IBOutlet weak var loginButton: UIButton!
-    //@IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
     
-//    @IBAction func
+    // Link sign up button with
+    @IBAction func signUp(_ sender: Any) {
+        UIApplication.shared.open(URL(string : "https://auth.udacity.com/sign-up")!, options: [:], completionHandler: { (status) in
+        })
+    }
     
     
     
