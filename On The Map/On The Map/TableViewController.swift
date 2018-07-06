@@ -20,15 +20,18 @@ class TableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        // Add plus sign for the add symbol
+        // MARK: 
+        // Use plus sign for the add location nav button
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 4)!, target: self, action: #selector(TableViewController.addPin))
     }
+    
+    
     
     //MARK: Add Pin
     @objc func addPin() {
         // Create a instance of Destination AddPinViewController
         let goToAddPinViewController = storyboard?.instantiateViewController(withIdentifier: "AddPinStoryBoard") as! AddPinViewController
-        
+
         // Pass the created instance to current navigation stack
         present(goToAddPinViewController, animated: true, completion: nil)
     }

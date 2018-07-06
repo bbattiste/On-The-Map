@@ -14,11 +14,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Add plus sign for the add symbol
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:
-            UIBarButtonSystemItem(rawValue: 4)!, target: self,
-            action: #selector(MapViewController.addPin))
+        
+        //MARK: NAV BAR buttons
+        
+        // Use plus sign for the add location nav button
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 4)!, target: self, action: #selector(MapViewController.addPin))
+        
+        //TODO: link logout with removing all nav stacks
+        // Logout button:
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(MapViewController.logOut))
+        
+        // TODO // Refresh button:
+        //self.navigationItem.rightBarButtonItems //= UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 13)!, target: self, action: #selector(MapViewController.addPin))
+        
     }
     
     //MARK: Add Pin
@@ -29,5 +37,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // Pass the created instance to current navigation stack
         present(goToAddPinViewController, animated: true, completion: nil)
+    }
+    
+    @objc func logOut() {
+        if let navigationController = navigationController {
+            navigationController.popToRootViewController(animated: true)
+            print("logout button pressed")
+        }
     }
 }
