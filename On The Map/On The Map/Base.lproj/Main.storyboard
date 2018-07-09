@@ -219,7 +219,7 @@
         <!--Map View Controller-->
         <scene sceneID="Qef-bL-FZk">
             <objects>
-                <viewController title="Map" id="JnP-Xu-m0r" userLabel="Map View Controller" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JnP-Xu-m0r" userLabel="Map View Controller" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wYq-iS-qjw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -235,7 +235,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="Em9-1X-Hd5"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="jr6-nZ-B8h"/>
                     <navigationItem key="navigationItem" title="On the Map" id="fla-Q1-4GC"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1qT-VQ-dCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
