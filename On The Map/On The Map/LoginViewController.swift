@@ -14,6 +14,16 @@ class LoginViewController: UIViewController {
     // MARK: Outlets and variables
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextFIeld: UITextField!
+    @IBOutlet weak var debugTextLabel: UILabel!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+    }
     
     // Link sign up button with
     @IBAction func signUp(_ sender: Any) {
@@ -21,28 +31,23 @@ class LoginViewController: UIViewController {
         })
     }
     
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func completeLogin() {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapsTabBarController") as! UITabBarController
+        self.present(controller, animated: true, completion: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    private func getRequestToken() {
+        
+        /* 1. Set the parameters */
+        let methodParameters = [
+            
+        
+        ]
+        
+        
     }
-    */
 
+    
+    
+    
 }

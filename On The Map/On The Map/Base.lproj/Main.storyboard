@@ -77,10 +77,16 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="0.0" green="0.0030141193479999999" blue="0.70522992230000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <segue destination="AJ7-WK-a73" kind="presentation" id="Hl2-m6-Lnm"/>
-                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKm-7K-Ht9">
+                                <rect key="frame" x="16" y="458" width="343" height="114"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="114" id="Zwf-xb-ixf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -98,24 +104,30 @@
                             <constraint firstItem="ieX-wP-DJs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Tb7-26-yiq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ieX-wP-DJs" secondAttribute="trailing" constant="16" id="YZ8-wN-aUW"/>
                             <constraint firstItem="yNY-cJ-JfV" firstAttribute="top" secondItem="ieX-wP-DJs" secondAttribute="bottom" constant="8" id="YmV-6x-fvX"/>
+                            <constraint firstItem="HKm-7K-Ht9" firstAttribute="top" secondItem="HAj-dW-qvd" secondAttribute="bottom" constant="55" id="ZKK-Ra-geT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YGo-wa-cIq" secondAttribute="trailing" constant="16" id="aTV-2A-Yhn"/>
                             <constraint firstItem="HAj-dW-qvd" firstAttribute="top" secondItem="ieX-wP-DJs" secondAttribute="bottom" constant="44" id="c5B-o6-EAS"/>
                             <constraint firstItem="ieX-wP-DJs" firstAttribute="top" secondItem="YGo-wa-cIq" secondAttribute="bottom" constant="8" id="crw-WA-MFj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9Eb-Ro-IfA" secondAttribute="trailing" constant="16" id="d2d-k0-OAb"/>
                             <constraint firstItem="yNY-cJ-JfV" firstAttribute="top" secondItem="ieX-wP-DJs" secondAttribute="bottom" constant="8" id="g5q-yW-kXm"/>
                             <constraint firstItem="YGo-wa-cIq" firstAttribute="top" secondItem="9Eb-Ro-IfA" secondAttribute="bottom" constant="8" id="hF8-2u-LQr"/>
+                            <constraint firstItem="HKm-7K-Ht9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ijd-ad-M4Y"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jq5-yf-zuc" secondAttribute="trailing" constant="76" id="k19-nI-qiT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="S4b-51-fRb" secondAttribute="trailing" constant="16" id="qAO-cb-Wxw"/>
                             <constraint firstItem="9Eb-Ro-IfA" firstAttribute="top" secondItem="S4b-51-fRb" secondAttribute="bottom" constant="34" id="rs7-6d-2Tf"/>
                             <constraint firstItem="Jq5-yf-zuc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="uZy-D7-pVn"/>
                             <constraint firstItem="S4b-51-fRb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="53" id="vUL-Na-zgw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HKm-7K-Ht9" secondAttribute="trailing" constant="16" id="xhh-qd-ND3"/>
                             <constraint firstItem="HAj-dW-qvd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="273" id="y3m-p7-3Bx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="debugTextLabel" destination="HKm-7K-Ht9" id="Nxi-Rb-dV3"/>
                         <outlet property="loginButton" destination="yNY-cJ-JfV" id="4No-Mq-epJ"/>
+                        <outlet property="passwordTextFIeld" destination="ieX-wP-DJs" id="g0M-YU-pGo"/>
                         <outlet property="signUpButton" destination="HAj-dW-qvd" id="mry-JY-wA1"/>
+                        <outlet property="usernameTextField" destination="YGo-wa-cIq" id="vig-0K-8Uv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -260,10 +272,10 @@
             </objects>
             <point key="canvasLocation" x="1705" y="-198"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--MapsTabBarController-->
         <scene sceneID="91r-Q5-k58">
             <objects>
-                <tabBarController id="AJ7-WK-a73" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MapsTabBarController" title="MapsTabBarController" id="AJ7-WK-a73" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IxR-u7-DJB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
