@@ -36,15 +36,34 @@ class LoginViewController: UIViewController {
         self.present(controller, animated: true, completion: nil)
     }
     
-    private func getRequestToken() {
+    private func postSession() {
         
-        /* 1. Set the parameters */
-//        let methodParameters = [
-//            
-//        
-//        ]
+        /* 1/2/3. Set the parameters, Build the URL, Configure the request */
         
+        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "{\"\(Constants.UdacityParameterKeys.Dictionary)\": {\"\(Constants.UdacityParameterKeys.Username)\": \"\(usernameTextField.text!)\", \"\(Constants.UdacityParameterKeys.Password)\": \"\(passwordTextFIeld.text!)\"}}".data(using: .utf8)
         
+        /* 4. Make the request */
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            
+            // if error occurs, print it and re-enable the UI
+            func displayError(_ error: String) {
+                print(error)
+                performUIUpdatesOnMain {
+                    self.setUIEnabled(true)
+                    self.debugTextLabel.text = "Login Failed (Request Token)."
+                }
+            }
+            
+            let range = Range(5..<data!.count)
+            let newData = data?.subdata(in: range) /* subset response data! */
+            print(String(data: newData!, encoding: .utf8)!)
+        }
+        task.resume()
     }
 
     
