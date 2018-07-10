@@ -34,6 +34,7 @@ class LoginViewController: UIViewController {
     // MARK: Login
     
     @IBAction func login(_ sender: AnyObject) {
+        debugTextLabel.text = ""
         
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             debugTextLabel.text = "Username or Password Empty."
@@ -64,18 +65,22 @@ class LoginViewController: UIViewController {
             // if error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
                 print(error)
-                performUIUpdatesOnMain {
-                    self.setUIEnabled(true)
-                    self.debugTextLabel.text = "Login Failed (Post Session)."
-                }
+//                performUIUpdatesOnMain {
+//                    self.setUIEnabled(true)
+//                    self.debugTextLabel.text = "Login Failed (Post Session)."
+//                }
             }
             
             let range = Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
             print(String(data: newData!, encoding: .utf8)!)
+            
+            self.completeLogin()
+            print("***login success***")
         }
+        
         task.resume()
-        print("postSession success")
+        
     }
 
     
