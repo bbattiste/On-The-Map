@@ -65,10 +65,10 @@ class LoginViewController: UIViewController {
             // if error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
                 print(error)
-//                performUIUpdatesOnMain {
-//                    self.setUIEnabled(true)
-//                    self.debugTextLabel.text = "Login Failed (Post Session)."
-//                }
+                performUIUpdatesOnMain {
+                    self.setUIEnabled(true)
+                    self.debugTextLabel.text = "Login Failed (Post Session)."
+                }
             }
             
             let range = Range(5..<data!.count)
@@ -88,7 +88,28 @@ class LoginViewController: UIViewController {
     
 }
 
+// MARK: - LoginViewController: UITextFieldDelegate
 
+extension LoginViewController: UITextFieldDelegate {
+    
+    // textfields will return with enter key
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // textfields will return with touch on view
+    private func resignIfFirstResponder(_ textField: UITextField) {
+        if textField.isFirstResponder {
+            textField.resignFirstResponder()
+        }
+    }
+    
+    @IBAction func userDidTapView(_ sender: AnyObject) {
+        resignIfFirstResponder(usernameTextField)
+        resignIfFirstResponder(passwordTextField)
+    }
+}
 // MARK: - LoginViewController (Configure UI)
 
 private extension LoginViewController {
