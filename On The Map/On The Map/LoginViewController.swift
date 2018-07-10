@@ -39,10 +39,10 @@ class LoginViewController: UIViewController {
     private func getRequestToken() {
         
         /* 1. Set the parameters */
-        let methodParameters = [
-            
-        
-        ]
+//        let methodParameters = [
+//            
+//        
+//        ]
         
         
     }
