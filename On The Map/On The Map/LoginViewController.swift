@@ -15,7 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var passwordTextFIeld: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var debugTextLabel: UILabel!
     
     
@@ -31,6 +31,17 @@ class LoginViewController: UIViewController {
         })
     }
     
+    // MARK: Login
+    
+    @IBAction func login(_ sender: AnyObject) {
+        
+        if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
+            debugTextLabel.text = "Username or Password Empty."
+        }
+        
+        postSession()
+    }
+    
     private func completeLogin() {
         let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapsTabBarController") as! UITabBarController
         self.present(controller, animated: true, completion: nil)
@@ -44,7 +55,7 @@ class LoginViewController: UIViewController {
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"\(Constants.UdacityParameterKeys.Dictionary)\": {\"\(Constants.UdacityParameterKeys.Username)\": \"\(usernameTextField.text!)\", \"\(Constants.UdacityParameterKeys.Password)\": \"\(passwordTextFIeld.text!)\"}}".data(using: .utf8)
+        request.httpBody = "{\"\(Constants.UdacityParameterKeys.Dictionary)\": {\"\(Constants.UdacityParameterKeys.Username)\": \"\(usernameTextField.text!)\", \"\(Constants.UdacityParameterKeys.Password)\": \"\(passwordTextField.text!)\"}}".data(using: .utf8)
         
         /* 4. Make the request */
         let session = URLSession.shared
@@ -55,7 +66,7 @@ class LoginViewController: UIViewController {
                 print(error)
                 performUIUpdatesOnMain {
                     self.setUIEnabled(true)
-                    self.debugTextLabel.text = "Login Failed (Request Token)."
+                    self.debugTextLabel.text = "Login Failed (Post Session)."
                 }
             }
             
@@ -64,9 +75,24 @@ class LoginViewController: UIViewController {
             print(String(data: newData!, encoding: .utf8)!)
         }
         task.resume()
+        print("postSession success")
     }
 
     
     
     
+}
+
+
+// MARK: - LoginViewController (Configure UI)
+
+private extension LoginViewController {
+    
+    func setUIEnabled(_ enabled: Bool) {
+        usernameTextField.isEnabled = enabled
+        passwordTextField.isEnabled = enabled
+        loginButton.isEnabled = enabled
+        debugTextLabel.text = ""
+        debugTextLabel.isEnabled = enabled
+    }
 }
