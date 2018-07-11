@@ -44,8 +44,12 @@ class LoginViewController: UIViewController {
     }
     
     private func completeLogin() {
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapsTabBarController") as! UITabBarController
-        self.present(controller, animated: true, completion: nil)
+        performUIUpdatesOnMain {
+            self.debugTextLabel.text = ""
+            self.setUIEnabled(true)
+            let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapsTabBarController") as! UITabBarController
+            self.present(controller, animated: true, completion: nil)
+        }
     }
     
     private func postSession() {
@@ -67,18 +71,50 @@ class LoginViewController: UIViewController {
                 print(error)
                 performUIUpdatesOnMain {
                     self.setUIEnabled(true)
-                    self.debugTextLabel.text = "Login Failed (Post Session)."
+                    self.debugTextLabel.text = "Login Failed"
                 }
             }
             
-            let range = Range(5..<data!.count)
-            let newData = data?.subdata(in: range) /* subset response data! */
-            print(String(data: newData!, encoding: .utf8)!)
+            // Guard: was there an error?
+            guard (error == nil) else {
+                displayError("There was an error with your request: \(String(describing: error))")
+                return
+            }
+            // Guard: Is there a succesful HTTP 2XX response?
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                displayError("Your request returned a status code other than 2xx!")
+                return
+            }
+            // Guard: any data returned?
+            guard let data = data else {
+                displayError("No data was returned!")
+                return
+            }
             
+            /* 5. Parse the data */
+            
+            let parsedResult: [String:AnyObject]!
+            do {
+                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+            } catch {
+                displayError("Could not parse the data as JSON: '\(data)'")
+                return
+            }
+            
+            // GUARD: Is the "request_token" key in parsedResult?
+            guard
+            
+            
+            let range = Range(5..<data.count)
+            let newData = data.subdata(in: range) /* subset response data! */
+            print(String(data: newData, encoding: .utf8)!)
             self.completeLogin()
             print("***login success***")
+            print(request)
+            print(data)
         }
         
+        /* 5. Parse the data */
         task.resume()
         
     }
