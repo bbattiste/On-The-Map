@@ -247,18 +247,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="test map 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cM5-O3-JHh">
-                                <rect key="frame" x="166" y="323" width="147" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bed-5G-v7O">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bed-5G-v7O" firstAttribute="trailing" secondItem="Em9-1X-Hd5" secondAttribute="trailing" id="47E-AB-DoG"/>
+                            <constraint firstItem="bed-5G-v7O" firstAttribute="bottom" secondItem="Em9-1X-Hd5" secondAttribute="bottom" id="YnD-DM-Tvx"/>
+                            <constraint firstItem="bed-5G-v7O" firstAttribute="top" secondItem="Em9-1X-Hd5" secondAttribute="top" id="hNR-QT-gXG"/>
+                            <constraint firstItem="bed-5G-v7O" firstAttribute="leading" secondItem="Em9-1X-Hd5" secondAttribute="leading" id="uyN-Ym-7fs"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Em9-1X-Hd5"/>
                     </view>
                     <navigationItem key="navigationItem" title="On the Map" id="fla-Q1-4GC"/>
+                    <connections>
+                        <outlet property="mapView" destination="bed-5G-v7O" id="7Rb-hw-slJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1qT-VQ-dCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

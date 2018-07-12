@@ -90,38 +90,15 @@ class LoginViewController: UIViewController {
                 displayError("No data was returned!")
                 return
             }
-            
-            /* 5. Parse the data */
-            
-            let parsedResult: [String:AnyObject]!
-            do {
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
-            } catch {
-                displayError("Could not parse the data as JSON: '\(data)'")
-                return
-            }
-            
-            // GUARD: Is the "request_token" key in parsedResult?
-            guard
-            
-            
+                        
             let range = Range(5..<data.count)
             let newData = data.subdata(in: range) /* subset response data! */
             print(String(data: newData, encoding: .utf8)!)
             self.completeLogin()
             print("***login success***")
-            print(request)
-            print(data)
         }
-        
-        /* 5. Parse the data */
         task.resume()
-        
     }
-
-    
-    
-    
 }
 
 // MARK: - LoginViewController: UITextFieldDelegate
