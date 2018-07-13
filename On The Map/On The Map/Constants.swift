@@ -21,14 +21,22 @@ struct Constants {
         static let Dictionary = "udacity"
         static let Username = "username"
         static let Password = "password"
+        static let ApplicationIDKey = "X-Parse-Application-Id"
+        static let ApiKey = "X-Parse-REST-API-Key"
     }
     
     // MARK: Udacity Parameter Values
     struct UdacityParameterValues {
-        static let ApiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+        static let ApiKeyValue = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+        static let ApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
     }
     
-    static let ParseApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
+    // MARK: Udacity Response Values
+    struct UdacityResponseValues {
+        static var Students = [String]()
+    }
+    
+    
     
     static let ObjectId = "objectId"
 
