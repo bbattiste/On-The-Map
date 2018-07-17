@@ -120,28 +120,29 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.mapView.addAnnotations(annotations)
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        let reuseId = "pin"
-        
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-        
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView!.canShowCallout = true
-            pinView!.pinTintColor = .green
-            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-        }
-        else {
-            pinView!.annotation = annotation
-        }
-        
-        return pinView
-    }
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//
+//        let reuseId = "pin"
+//
+//        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+//
+//        if pinView == nil {
+//            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+//            pinView!.canShowCallout = true
+//            pinView!.pinTintColor = .green
+//            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+//        }
+//        else {
+//            pinView!.annotation = annotation
+//        }
+//
+//        return pinView
+//    }
     
     
     // This delegate method is implemented to respond to taps. It opens the system browser
     // to the URL specified in the annotationViews subtitle property.
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
@@ -162,9 +163,58 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @objc func logOut() {
-        if let navigationController = navigationController {
-            navigationController.popToRootViewController(animated: true)
-            print("logout button pressed")
-        }
+        let goToLoginViewController = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        
+        // Pass the created instance to current navigation stack
+        present(goToLoginViewController, animated: true, completion: nil)
     }
+        
+//        private func postSession() {
+//
+//            /* 1/2/3. Set the parameters, Build the URL, Configure the request */
+//
+//            var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+//            request.httpMethod = "POST"
+//            request.addValue("application/json", forHTTPHeaderField: "Accept")
+//            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//            request.httpBody = "{\"\(Constants.UdacityParameterKeys.Dictionary)\": {\"\(Constants.UdacityParameterKeys.Username)\": \"\(usernameTextField.text!)\", \"\(Constants.UdacityParameterKeys.Password)\": \"\(passwordTextField.text!)\"}}".data(using: .utf8)
+//
+//            /* 4. Make the request */
+//            let session = URLSession.shared
+//            let task = session.dataTask(with: request) { data, response, error in
+//
+//                // if error occurs, print it and re-enable the UI
+//                func displayError(_ error: String) {
+//                    print(error)
+//                    performUIUpdatesOnMain {
+//                        self.setUIEnabled(true)
+//                        self.debugTextLabel.text = "Login Failed"
+//                    }
+//                }
+//
+//                // Guard: was there an error?
+//                guard (error == nil) else {
+//                    displayError("There was an error with your request: \(String(describing: error))")
+//                    return
+//                }
+//                // Guard: Is there a succesful HTTP 2XX response?
+//                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+//                    displayError("Your request returned a status code other than 2xx!")
+//                    return
+//                }
+//                // Guard: any data returned?
+//                guard let data = data else {
+//                    displayError("No data was returned!")
+//                    return
+//                }
+//
+//                let range = Range(5..<data.count)
+//                let newData = data.subdata(in: range) /* subset response data! */
+//                print(String(data: newData, encoding: .utf8)!)
+//                self.completeLogin()
+//                print("***login success***")
+//            }
+//            task.resume()
+//        }
+//    }
 }
