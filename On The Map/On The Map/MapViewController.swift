@@ -39,7 +39,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     func getStudentLocations() {
         
         /* 1/2/3. Set the parameters, Build the URL, Configure the request */
-        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
+        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=5")!)
         request.addValue(Constants.UdacityParameterValues.ApplicationID, forHTTPHeaderField: Constants.UdacityParameterKeys.ApplicationIDKey)
         request.addValue(Constants.UdacityParameterValues.ApiKeyValue, forHTTPHeaderField: Constants.UdacityParameterKeys.ApiKey)
         
@@ -83,15 +83,41 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 displayError("Cannot find key 'results' in \(parsedResult)")
                 return
             }
-            
+            print(studentLocations)
             self.createAnnotations(locations: studentLocations)
         }
         task.resume()
     }
     
     func createAnnotations(locations: [[String: AnyObject]]) {
+
+        // create an MKPointAnnotation for each dictionary
         var annotations = [MKPointAnnotation]()
+
+        for dictionary in locations {
+
+            let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
+            let long = CLLocationDegrees(dictionary["longitude"] as! Double)
+
+            // Lat and long are used to create a CLLocationCoordinates2D instance.
+            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+
+            let first = dictionary["firstName"] as! String
+            let last = dictionary["lastName"] as! String
+            let mediaURL = dictionary["mediaURL"] as! String
+
+            // Here we create the annotation and set its coordiate, title, and subtitle properties
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "\(first) \(last)"
+            annotation.subtitle = mediaURL
+
+            // Finally we place the annotation in an array of annotations.
+            annotations.append(annotation)
+        }
         
+        // add the annotations to the map.
+        self.mapView.addAnnotations(annotations)
     }
     
     
