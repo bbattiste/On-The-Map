@@ -20,7 +20,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         getStudentLocations()
-        
+
         //MARK: NAV BAR buttons
         
         // Use plus sign for the add location nav button
@@ -35,6 +35,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
+    // TODO: Random Paginate results
     func getStudentLocations() {
         
         /* 1/2/3. Set the parameters, Build the URL, Configure the request */
@@ -78,18 +79,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             /* 6. Use the data */
             
-            guard let students = parsedResult["results"] as? [[String: AnyObject]] else {
+            guard let studentLocations = parsedResult["results"] as? [[String: AnyObject]] else {
                 displayError("Cannot find key 'results' in \(parsedResult)")
                 return
             }
             
-            ///TODO: Do something with students results
-            //self.locations = students
+            self.createAnnotations(locations: studentLocations)
         }
         task.resume()
     }
     
-
+    func createAnnotations(locations: [[String: AnyObject]]) {
+        var annotations = [MKPointAnnotation]()
+        
+    }
+    
+    
+    
     //MARK: Add Pin
     
     @objc func addPin() {
