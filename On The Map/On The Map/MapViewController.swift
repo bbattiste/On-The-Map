@@ -18,7 +18,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         getStudentLocations()
 
         //MARK: NAV BAR buttons
@@ -35,7 +34,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         //TODO: link logout with removing all nav stacks
         // create/Add Logout button to left nav bar:
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(MapViewController.logOut))
-        
     }
     
     @objc func getStudentLocations() {
