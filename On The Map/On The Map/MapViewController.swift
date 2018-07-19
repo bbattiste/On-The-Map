@@ -24,19 +24,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         //MARK: NAV BAR buttons
         
         // Use plus sign for the add location nav button
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 4)!, target: self, action: #selector(MapViewController.addPin))
+        let addPinButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 4)!, target: self, action: #selector(MapViewController.addPin))
+        
+        // Create refresh button:
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 13)!, target: self, action: #selector(MapViewController.getStudentLocations))
+        
+        // Add refresh and addPin buttons to right nav bar
+        self.navigationItem.rightBarButtonItems = [addPinButton, refreshButton]
         
         //TODO: link logout with removing all nav stacks
-        // Logout button:
+        // create/Add Logout button to left nav bar:
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(MapViewController.logOut))
-        
-        // TODO // Refresh button:
-        //self.navigationItem.rightBarButtonItems //= UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 13)!, target: self, action: #selector(MapViewController.addPin))
         
     }
     
-    // TODO: Random Paginate results
-    func getStudentLocations() {
+    @objc func getStudentLocations() {
         
         /* 1/2/3. Set the parameters, Build the URL, Configure the request */
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=5")!)
