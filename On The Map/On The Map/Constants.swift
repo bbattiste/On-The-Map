@@ -32,8 +32,8 @@ struct Constants {
     }
     
     // MARK: Udacity Response Values
-    struct UdacityResponseValues {
-        static var Students = [String]()
+    struct ParseResponseValues {
+        static var Students = [[String: AnyObject]]()
     }
     
     

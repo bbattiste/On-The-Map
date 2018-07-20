@@ -84,6 +84,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 return
             }
             self.createAnnotations(locations: studentLocations)
+            Constants.ParseResponseValues.Students = studentLocations
         }
         task.resume()
     }
