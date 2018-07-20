@@ -26,7 +26,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let addPinButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 4)!, target: self, action: #selector(MapViewController.addPin))
         
         // Create refresh button:
-        let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 13)!, target: self, action: #selector(MapViewController.getStudentLocations))
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 13)!, target: self, action: #selector(MapViewController.viewDidLoad))
         
         // Add refresh and addPin buttons to right nav bar
         self.navigationItem.rightBarButtonItems = [addPinButton, refreshButton]
@@ -83,7 +83,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 displayError("Cannot find key 'results' in \(parsedResult)")
                 return
             }
-            print(studentLocations)
             self.createAnnotations(locations: studentLocations)
         }
         task.resume()

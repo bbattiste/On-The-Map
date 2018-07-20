@@ -55,3 +55,5 @@ func deleteSession() {
     }
     task.resume()
 }
+
+
