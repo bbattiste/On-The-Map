@@ -232,7 +232,9 @@
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="Wjg-5a-8JH" id="BLN-Bs-Kdw"/>
+                        <outlet property="locationTextField" destination="tjt-A2-gl2" id="7MF-Xf-pp1"/>
                         <outlet property="navBar" destination="CDw-ky-uzb" id="SlP-ad-UcQ"/>
+                        <outlet property="websiteTextField" destination="ddr-vG-GAe" id="x4a-fa-mtK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q4t-mC-mUk" userLabel="First Responder" sceneMemberID="firstResponder"/>

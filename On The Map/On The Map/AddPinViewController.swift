@@ -13,6 +13,8 @@ class AddPinViewController: UIViewController {
     //MARK: outlets and variables
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var websiteTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
