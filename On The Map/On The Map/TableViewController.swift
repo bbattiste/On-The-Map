@@ -98,12 +98,10 @@ class TableViewController: UITableViewController {
 //    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("test 4 self.locations.count: \(Constants.ParseResponseValues.Students.count)")
         return Constants.ParseResponseValues.Students.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("test 5 CELL FOR ROW AT CALLED")
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell", for: indexPath)
         let student = Constants.ParseResponseValues.Students[(indexPath as NSIndexPath).row]
 

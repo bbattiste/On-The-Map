@@ -33,7 +33,7 @@ struct Constants {
     
     // MARK: Udacity Response Values
     struct UdacityResponseValues {
-        static let AccountKey = "" // Udacity AccountKey is Parse UniqueKey
+        static var AccountKey = "" // Udacity AccountKey is Parse UniqueKey
     }
     
     // MARK: Parse Parameter Values
