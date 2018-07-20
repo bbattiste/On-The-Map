@@ -20,9 +20,10 @@ class AddPinViewController: UIViewController {
         navBar.isHidden = false
     }
 
-    
-    
     @IBAction func cancel() {
         dismiss(animated: true, completion: nil)
     }
 }
+
+
+

@@ -32,6 +32,23 @@ struct Constants {
     }
     
     // MARK: Udacity Response Values
+    struct UdacityResponseValues {
+        static let AccountKey = "" // Udacity AccountKey is Parse UniqueKey
+    }
+    
+    // MARK: Parse Parameter Values
+    struct ParseParameterValues {
+        static let UniqueKey = "uniqueKey" // Parse UniqueKey is Udacity AccountKey
+        static let FirstName = "firstName"
+        static let LastName = "lastName"
+        static let MapString = "mapString"
+        static let MediaURL = "mediaURL"
+        static let Latitude = "latitude"
+        static let Longitude = "longitude"
+        static let ObjectId = "objectId"
+    }
+    
+    // MARK: Parse Response Values
     struct ParseResponseValues {
         static var Students = [[String: AnyObject]]()
     }
