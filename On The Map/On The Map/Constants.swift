@@ -51,6 +51,13 @@ struct Constants {
     // MARK: Parse Response Values
     struct ParseResponseValues {
         static var Students = [[String: AnyObject]]()
+        static var StudentResults = [[String: AnyObject]]()
+        static var FirstName = ""
+        static var LastName = ""
+        static var MapString = ""
+        static var MediaURL = ""
+        static var Latitude = 0
+        static var Longitude = 0
     }
     
     

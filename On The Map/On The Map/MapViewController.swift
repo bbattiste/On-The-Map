@@ -76,7 +76,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 displayError("Could not parse the data as JSON: '\(data)'")
                 return
             }
-            print(parsedResult)
+
             /* 6. Use the data */
             
             guard let studentLocations = parsedResult["results"] as? [[String: AnyObject]] else {
