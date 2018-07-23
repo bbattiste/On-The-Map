@@ -42,8 +42,8 @@ class LoginViewController: UIViewController {
             debugTextLabel.text = "Username or Password Empty."
         }
         //TODO LOGIN: Uncomment
-        postSession()
-        //completeLogin()
+//        postSession()
+        completeLogin()
     }
     
     private func completeLogin() {
@@ -55,78 +55,78 @@ class LoginViewController: UIViewController {
         }
     }
     // TODO LOGIN: Uncomment
-    private func postSession() {
-
-        /* 1/2/3. Set the parameters, Build the URL, Configure the request */
-
-        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"\(Constants.UdacityParameterKeys.Dictionary)\": {\"\(Constants.UdacityParameterKeys.Username)\": \"\(usernameTextField.text!)\", \"\(Constants.UdacityParameterKeys.Password)\": \"\(passwordTextField.text!)\"}}".data(using: .utf8)
-
-        /* 4. Make the request */
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-
-            // if error occurs, print it and re-enable the UI
-            func displayError(_ error: String) {
-                print(error)
-                performUIUpdatesOnMain {
-                    self.setUIEnabled(true)
-                    self.debugTextLabel.text = "Login Failed"
-                }
-            }
-
-            // Guard: was there an error?
-            guard (error == nil) else {
-                displayError("There was an error with your request: \(String(describing: error))")
-                return
-            }
-            // Guard: Is there a succesful HTTP 2XX response?
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                displayError("Your request returned a status code other than 2xx!")
-                return
-            }
-            // Guard: any data returned?
-            guard let data = data else {
-                displayError("No data was returned!")
-                return
-            }
-
-            let range = Range(5..<data.count)
-            let newData = data.subdata(in: range) /* subset response data! */
-            
-            /* 5. Parse the data */
-            let parsedResult: [String:AnyObject]!
-            do {
-                parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String:AnyObject]
-            } catch {
-                displayError("Could not parse the data as JSON: '\(String(data: newData, encoding: .utf8)!)'")
-                return
-            }
-            print("parsedResult: \(parsedResult)")
-            
-            /* 6. Use the data */
-            
-            guard let account = parsedResult["account"] as? [String: AnyObject] else {
-                displayError("Cannot find key 'account' in \(parsedResult)")
-                return
-            }
-            
-//            guard let key = parsedResult["key"] as? [String: AnyObject] else {
+//    private func postSession() {
+//
+//        /* 1/2/3. Set the parameters, Build the URL, Configure the request */
+//
+//        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+//        request.httpMethod = "POST"
+//        request.addValue("application/json", forHTTPHeaderField: "Accept")
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.httpBody = "{\"\(Constants.UdacityParameterKeys.Dictionary)\": {\"\(Constants.UdacityParameterKeys.Username)\": \"\(usernameTextField.text!)\", \"\(Constants.UdacityParameterKeys.Password)\": \"\(passwordTextField.text!)\"}}".data(using: .utf8)
+//
+//        /* 4. Make the request */
+//        let session = URLSession.shared
+//        let task = session.dataTask(with: request) { data, response, error in
+//
+//            // if error occurs, print it and re-enable the UI
+//            func displayError(_ error: String) {
+//                print(error)
+//                performUIUpdatesOnMain {
+//                    self.setUIEnabled(true)
+//                    self.debugTextLabel.text = "Login Failed"
+//                }
+//            }
+//
+//            // Guard: was there an error?
+//            guard (error == nil) else {
+//                displayError("There was an error with your request: \(String(describing: error))")
+//                return
+//            }
+//            // Guard: Is there a succesful HTTP 2XX response?
+//            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+//                displayError("Your request returned a status code other than 2xx!")
+//                return
+//            }
+//            // Guard: any data returned?
+//            guard let data = data else {
+//                displayError("No data was returned!")
+//                return
+//            }
+//
+//            let range = Range(5..<data.count)
+//            let newData = data.subdata(in: range) /* subset response data! */
+//
+//            /* 5. Parse the data */
+//            let parsedResult: [String:AnyObject]!
+//            do {
+//                parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String:AnyObject]
+//            } catch {
+//                displayError("Could not parse the data as JSON: '\(String(data: newData, encoding: .utf8)!)'")
+//                return
+//            }
+//            print("parsedResult: \(parsedResult)")
+//
+//            /* 6. Use the data */
+//
+//            guard let account = parsedResult["account"] as? [String: AnyObject] else {
 //                displayError("Cannot find key 'account' in \(parsedResult)")
 //                return
 //            }
-            
-            print(account)
-            Constants.UdacityResponseValues.AccountKey = account["key"] as! String
-            print("Constants.UdacityResponseValues.AccountKey = \(Constants.UdacityResponseValues.AccountKey)")
-            self.completeLogin()
-            print("***login success***")
-        }
-        task.resume()
-    }
+//
+////            guard let key = parsedResult["key"] as? [String: AnyObject] else {
+////                displayError("Cannot find key 'account' in \(parsedResult)")
+////                return
+////            }
+//
+//            print(account)
+//            Constants.UdacityResponseValues.AccountKey = account["key"] as! String
+//            print("Constants.UdacityResponseValues.AccountKey = \(Constants.UdacityResponseValues.AccountKey)")
+//            self.completeLogin()
+//            print("***login success***")
+//        }
+//        task.resume()
+//    }
 }
 
 // MARK: - LoginViewController: UITextFieldDelegate
