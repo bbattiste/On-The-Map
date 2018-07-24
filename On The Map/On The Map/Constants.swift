@@ -58,6 +58,7 @@ struct Constants {
         static var MediaURL = ""
         static var Latitude = 0
         static var Longitude = 0
+        static var ObjectId = ""
     }
     
     

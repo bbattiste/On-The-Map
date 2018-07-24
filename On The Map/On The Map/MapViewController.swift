@@ -156,6 +156,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // TODO: UPdate code
+//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//        if control == view.rightCalloutAccessoryView {
+//            let app = UIApplication.shared
+//            if let toOpen = view.annotation?.subtitle! {
+//                if UdacityAPI.sharedInstance().checkURL(toOpen){
+//                    app.openURL(URL(string: toOpen)!)
+//                } else {
+//                    UdacityAPI.sharedInstance().alertError(self, error: self.appDelegate.errorMessage.InvalidLink)
+//                }
+//            }
+//        }
+//    }
+    
     //MARK: Add Pin
     
     @objc func addPin() {
