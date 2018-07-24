@@ -116,6 +116,7 @@ class LoginViewController: UIViewController {
             Constants.UdacityResponseValues.AccountKey = account["key"] as! String
             self.completeLogin()
             print("***login success***")
+            print("Constants.UdacityResponseValues.AccountKey = \(Constants.UdacityResponseValues.AccountKey)")
         }
         task.resume()
     }
