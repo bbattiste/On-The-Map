@@ -59,5 +59,6 @@ struct Constants {
         static var Latitude = 0
         static var Longitude = 0
         static var ObjectId = ""
+        static var IsOnTheMap = false
     }
 }

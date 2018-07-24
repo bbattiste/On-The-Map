@@ -133,27 +133,21 @@ class AddPinViewController: UIViewController {
                 return
             }
             
-            print(results)
-            
-            //*****TODO: Why is a newstudent not getting info on this app
-            
             if results.isEmpty == true {
                 print("no results")
+                Constants.ParseResponseValues.IsOnTheMap = false
                 return
             } else {
                 print("yes array")
+                Constants.ParseResponseValues.IsOnTheMap = true
+                let student = results[0] as [String: AnyObject]
+                Constants.ParseResponseValues.ObjectId = student["objectId"] as! String
             }
-            let student = results[0] as [String: AnyObject]
-            
-            Constants.ParseResponseValues.FirstName = student["firstName"] as! String
-            Constants.ParseResponseValues.LastName = student["lastName"] as! String
-            Constants.ParseResponseValues.ObjectId = student["objectId"] as! String
-            
-            self.updateStudentLocation()
         }
         task.resume()
     }
     
+    //TODO: Get lat/long func to work to get coordinates for this func
     func updateStudentLocation() {
         let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.ParseResponseValues.ObjectId)"
         let url = URL(string: urlString)
@@ -202,7 +196,7 @@ class AddPinViewController: UIViewController {
 //        CLGeocoder.geocodeAddressString(<#T##CLGeocoder#>)
 //    }
     
-    
+    //TODO: Alert View: look at MemeMe app
 }
 
 
