@@ -74,16 +74,18 @@ class AddPinViewController: UIViewController {
                 return
             }
             
+            print(results)
+            
+            if results.isEmpty == true {
+                print("no results")
+                return
+            } else {
+                print("yes array")
+            }
             let student = results[0] as [String: AnyObject]
             
             Constants.ParseResponseValues.FirstName = student["firstName"] as! String
             Constants.ParseResponseValues.LastName = student["lastName"] as! String
-            //Constants.ParseResponseValues.MapString =
-            //Constants.ParseResponseValues.MediaURL =
-
-            print("Constants.ParseResponseValues.FirstName = \(Constants.ParseResponseValues.FirstName)")
-            print("Constants.ParseResponseValues.LastName = \(Constants.ParseResponseValues.LastName)")
-            
         }
         task.resume()
     }
