@@ -56,8 +56,8 @@ struct Constants {
         static var LastName = ""
         static var MapString = ""
         static var MediaURL = ""
-        static var Latitude = 0
-        static var Longitude = 0
+        static var Latitude: Double = 0
+        static var Longitude: Double = 0
         static var ObjectId = ""
         static var IsOnTheMap = false
     }

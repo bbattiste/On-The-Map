@@ -206,6 +206,9 @@
                                     <constraint firstAttribute="height" constant="30" id="ch5-Tr-NJ0"/>
                                 </constraints>
                                 <state key="normal" title="Find Location"/>
+                                <connections>
+                                    <action selector="getLatLong" destination="w8A-r8-VIH" eventType="touchUpInside" id="SmP-Sb-qty"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

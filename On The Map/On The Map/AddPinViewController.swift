@@ -24,8 +24,8 @@ class AddPinViewController: UIViewController {
 
         navBar.isHidden = false
         
-        GetPublicUserData()
-        checkIfStudentIsOnTheMap()
+//        GetPublicUserData()
+//        checkIfStudentIsOnTheMap()
     }
     
     @IBAction func cancel() {
@@ -185,16 +185,50 @@ class AddPinViewController: UIViewController {
             
             print(String(data: data, encoding: .utf8)!)
             
-            
-            
         }
         task.resume()
     }
     
-    //TODO: ****
-//    func getLatLong() {
-//        CLGeocoder.geocodeAddressString(<#T##CLGeocoder#>)
-//    }
+//    TODO: ****
+    @IBAction func getLatLong() {
+        
+        var geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(self.locationTextField.text!) { (placemark, error) in
+            
+            // if error occurs, print it and re-enable the UI
+            func displayError(_ error: String) {
+                print(error)
+            }
+            
+            // Guard: was there an error?
+            guard (error == nil) else {
+                displayError("There was an error with your request: \(String(describing: error))")
+                return
+            }
+            
+            guard let location = placemark else {
+                displayError("No placemark")
+                return
+            }
+            
+            print(String(describing: location))
+            
+            var coordinateParse: CLLocation?
+            
+            coordinateParse = location.first?.location
+            print("coordinatesLat: \(coordinateParse!)")
+            
+            if let coordinateParse = coordinateParse {
+                let coordinates = coordinateParse.coordinate
+                Constants.ParseResponseValues.Latitude = coordinates.latitude
+                Constants.ParseResponseValues.Longitude = coordinates.longitude
+                print("Constants.ParseResponseValues.Latitude: \(Constants.ParseResponseValues.Latitude)")
+                print("Constants.ParseResponseValues.Longitude: \(Constants.ParseResponseValues.Longitude)")
+            } else {
+                displayError("No Matching Location Found")
+            }
+        }
+    }
     
     //TODO: Alert View: look at MemeMe app
 }
