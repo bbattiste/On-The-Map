@@ -32,7 +32,7 @@ class AddPinViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    
+    // TODO: describe
     func GetPublicUserData() {
         let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/\(Constants.UdacityResponseValues.AccountKey)")!)
         

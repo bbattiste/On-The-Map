@@ -253,20 +253,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ayg-5W-28l">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7o-9H-FhU">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Confirm Location" id="RwL-eR-KtR">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ufr-OQ-ppd">
+                                            <connections>
+                                                <action selector="cancel" destination="ihl-H5-u0a" id="csb-8N-j6P"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ayg-5W-28l" firstAttribute="trailing" secondItem="I3w-c5-NZa" secondAttribute="trailing" id="IkY-b3-u1I"/>
-                            <constraint firstItem="ayg-5W-28l" firstAttribute="leading" secondItem="I3w-c5-NZa" secondAttribute="leading" id="Ogo-Vm-lHE"/>
-                            <constraint firstItem="ayg-5W-28l" firstAttribute="bottom" secondItem="I3w-c5-NZa" secondAttribute="bottom" id="Yy6-lj-bZt"/>
-                            <constraint firstItem="ayg-5W-28l" firstAttribute="top" secondItem="I3w-c5-NZa" secondAttribute="top" id="vGj-uP-bGW"/>
+                            <constraint firstItem="ayg-5W-28l" firstAttribute="trailing" secondItem="I3w-c5-NZa" secondAttribute="trailing" id="0Ja-Kv-pqf"/>
+                            <constraint firstItem="ayg-5W-28l" firstAttribute="leading" secondItem="I3w-c5-NZa" secondAttribute="leading" id="5LJ-eW-fzk"/>
+                            <constraint firstItem="J7o-9H-FhU" firstAttribute="trailing" secondItem="I3w-c5-NZa" secondAttribute="trailing" id="LS9-Pe-1aI"/>
+                            <constraint firstItem="J7o-9H-FhU" firstAttribute="top" secondItem="I3w-c5-NZa" secondAttribute="top" id="WIB-Ny-UaK"/>
+                            <constraint firstItem="ayg-5W-28l" firstAttribute="bottom" secondItem="I3w-c5-NZa" secondAttribute="bottom" id="erJ-rd-u2z"/>
+                            <constraint firstItem="ayg-5W-28l" firstAttribute="top" secondItem="J7o-9H-FhU" secondAttribute="bottom" id="mIV-ZJ-JGX"/>
+                            <constraint firstItem="J7o-9H-FhU" firstAttribute="leading" secondItem="I3w-c5-NZa" secondAttribute="leading" id="vS0-NN-NEX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="I3w-c5-NZa"/>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="Ufr-OQ-ppd" id="dNf-hE-MCb"/>
                         <outlet property="mapView" destination="ayg-5W-28l" id="s9L-ht-1P2"/>
+                        <outlet property="navBar" destination="J7o-9H-FhU" id="4vp-wD-5Pc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Be-jI-mqB" userLabel="First Responder" sceneMemberID="firstResponder"/>

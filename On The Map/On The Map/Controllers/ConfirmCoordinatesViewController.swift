@@ -13,16 +13,20 @@ import MapKit
 class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         createAnnotations()
         
-
-
     }
 
+    @IBAction func cancel() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     func createAnnotations() {
         
         // create an MKPointAnnotation for each dictionary
@@ -52,10 +56,40 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         
         // add the annotations to the map.
         self.mapView.addAnnotations(annotations)
-
-    
     }
-
+    
+    // This changes changes the view of the pin and mediaURL
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    
+    // This delegate method is implemented to respond to taps. It opens the system browser
+    // to the URL specified in the annotationViews subtitle property.
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.shared
+            if let toOpen = view.annotation?.subtitle! {
+                app.open(URL(string: toOpen)!, options: [:]) { (_) in
+                }
+            }
+        }
+    }
     
     
 
