@@ -244,20 +244,25 @@
             </objects>
             <point key="canvasLocation" x="3621.5999999999999" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
+        <!--Confirm Coordinates View Controller-->
         <scene sceneID="LFY-Og-xEt">
             <objects>
-                <viewController id="ihl-H5-u0a" sceneMemberID="viewController">
+                <viewController id="ihl-H5-u0a" customClass="ConfirmCoordinatesViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vfB-06-9Ra">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ayg-5W-28l">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ayg-5W-28l">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ayg-5W-28l" firstAttribute="trailing" secondItem="I3w-c5-NZa" secondAttribute="trailing" id="IkY-b3-u1I"/>
+                            <constraint firstItem="ayg-5W-28l" firstAttribute="leading" secondItem="I3w-c5-NZa" secondAttribute="leading" id="Ogo-Vm-lHE"/>
+                            <constraint firstItem="ayg-5W-28l" firstAttribute="bottom" secondItem="I3w-c5-NZa" secondAttribute="bottom" id="Yy6-lj-bZt"/>
+                            <constraint firstItem="ayg-5W-28l" firstAttribute="top" secondItem="I3w-c5-NZa" secondAttribute="top" id="vGj-uP-bGW"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="I3w-c5-NZa"/>
                     </view>
                 </viewController>
