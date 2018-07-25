@@ -189,7 +189,6 @@ class AddPinViewController: UIViewController {
         task.resume()
     }
     
-//    TODO: ****
     @IBAction func getLatLong() {
         
         var geocoder = CLGeocoder()
@@ -224,9 +223,12 @@ class AddPinViewController: UIViewController {
                 Constants.ParseResponseValues.Longitude = coordinates.longitude
                 print("Constants.ParseResponseValues.Latitude: \(Constants.ParseResponseValues.Latitude)")
                 print("Constants.ParseResponseValues.Longitude: \(Constants.ParseResponseValues.Longitude)")
+                Constants.ParseResponseValues.MediaURL = self.websiteTextField.text!
             } else {
                 displayError("No Matching Location Found")
             }
+            
+            //TODO: Func to look at coordinates in mapview and confirm
         }
     }
     
