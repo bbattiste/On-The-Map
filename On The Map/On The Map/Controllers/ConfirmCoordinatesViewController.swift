@@ -14,8 +14,10 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //setMapAnnotat
 
-        // Do any additional setup after loading the view.
+
     }
 
 
