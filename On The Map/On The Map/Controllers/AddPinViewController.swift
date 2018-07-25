@@ -205,30 +205,23 @@ class AddPinViewController: UIViewController {
                 return
             }
             
+            // Parse placemark results
             guard let location = placemark else {
                 displayError("No placemark")
                 return
             }
             
-            print(String(describing: location))
-            
             var coordinateParse: CLLocation?
-            
             coordinateParse = location.first?.location
-            print("coordinatesLat: \(coordinateParse!)")
-            
             if let coordinateParse = coordinateParse {
                 let coordinates = coordinateParse.coordinate
                 Constants.ParseResponseValues.Latitude = coordinates.latitude
                 Constants.ParseResponseValues.Longitude = coordinates.longitude
-                print("Constants.ParseResponseValues.Latitude: \(Constants.ParseResponseValues.Latitude)")
-                print("Constants.ParseResponseValues.Longitude: \(Constants.ParseResponseValues.Longitude)")
                 Constants.ParseResponseValues.MediaURL = self.websiteTextField.text!
-            } else {
-                displayError("No Matching Location Found")
             }
             
-            //TODO: Func to look at coordinates in mapview and confirm
+            let controller = self.storyboard!.instantiateViewController(withIdentifier: "ConfirmCoordinatesViewController") as! ConfirmCoordinatesViewController
+            self.present(controller, animated: true, completion: nil)
         }
     }
     

@@ -247,7 +247,7 @@
         <!--Confirm Coordinates View Controller-->
         <scene sceneID="LFY-Og-xEt">
             <objects>
-                <viewController id="ihl-H5-u0a" customClass="ConfirmCoordinatesViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConfirmCoordinatesViewController" id="ihl-H5-u0a" customClass="ConfirmCoordinatesViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vfB-06-9Ra">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
