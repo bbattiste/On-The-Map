@@ -79,7 +79,47 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    // TODO: add pin customizing/ touch on website to follow link: NOT WORKING/ cancel button name to back: and to pop view maybe versus go to view
+    // TODO: add pin customizing/ use is OnMap or not to post or put
     
-
+    
+    func updateStudentLocation() {
+        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.ParseResponseValues.ObjectId)"
+        let url = URL(string: urlString)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "PUT"
+        request.addValue(Constants.UdacityParameterValues.ApplicationID, forHTTPHeaderField: Constants.UdacityParameterKeys.ApplicationIDKey)
+        request.addValue(Constants.UdacityParameterValues.ApiKeyValue, forHTTPHeaderField: Constants.UdacityParameterKeys.ApiKey)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.UdacityResponseValues.AccountKey)\", \"firstName\": \"\(Constants.ParseResponseValues.FirstName)\", \"lastName\": \"\(Constants.ParseResponseValues.LastName)\",\"mapString\": \"Cupertino, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.322998, \"longitude\": -122.032182}".data(using: .utf8)
+        
+        /* 4. Make the request */
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            
+            // if error occurs, print it and re-enable the UI
+            func displayError(_ error: String) {
+                print(error)
+            }
+            
+            // Guard: was there an error?
+            guard (error == nil) else {
+                displayError("There was an error with your request: \(String(describing: error))")
+                return
+            }
+            // Guard: Is there a succesful HTTP 2XX response?
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                displayError("Your request returned a status code other than 2xx! Code# \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
+                return
+            }
+            // Guard: any data returned?
+            guard let data = data else {
+                displayError("No data was returned!")
+                return
+            }
+            
+            print(String(data: data, encoding: .utf8)!)
+            
+        }
+        task.resume()
+    }
 }

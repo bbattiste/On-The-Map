@@ -43,7 +43,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @objc func getStudentLocations() {
         
         /* 1/2/3. Set the parameters, Build the URL, Configure the request */
-        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100")!)
+        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")!)
         request.addValue(Constants.UdacityParameterValues.ApplicationID, forHTTPHeaderField: Constants.UdacityParameterKeys.ApplicationIDKey)
         request.addValue(Constants.UdacityParameterValues.ApiKeyValue, forHTTPHeaderField: Constants.UdacityParameterKeys.ApiKey)
         
@@ -56,6 +56,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 print(error)
             }
             
+            //TODO: Alert View: look at MemeMe app
             // Guard: was there an error?
             guard (error == nil) else {
                 displayError("There was an error with your request: \(String(describing: error))")
@@ -88,6 +89,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 return
             }
             
+            //TODO: may want to put in a constant var that decides if incomplete student still gets pin, but will not follow links
             //Check if all data we need is there
             var studentLocations = [[String: AnyObject]]()
             
@@ -193,7 +195,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         present(goToAddPinViewController, animated: true, completion: nil)
     }
     
-    //TODO: make logout dismiss viewController or present viewController by push not modal after logging in 
     @objc func logOut() {
         
         // Delete Session
