@@ -182,7 +182,7 @@
                                     <constraint firstAttribute="height" constant="66" id="xbS-XN-aEl"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter a Location" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjt-A2-gl2">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter a Location" borderStyle="roundedRect" placeholder="Enter a Location" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjt-A2-gl2">
                                 <rect key="frame" x="16" y="238" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="oOO-wu-nqC"/>
@@ -191,7 +191,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter a Website" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ddr-vG-GAe">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter a Website" borderStyle="roundedRect" placeholder="Enter a Website" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ddr-vG-GAe">
                                 <rect key="frame" x="16" y="276" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="jh7-4M-sRd"/>
@@ -259,7 +259,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Confirm Location" id="RwL-eR-KtR">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ufr-OQ-ppd">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Ufr-OQ-ppd">
                                             <connections>
                                                 <action selector="cancel" destination="ihl-H5-u0a" id="csb-8N-j6P"/>
                                             </connections>

@@ -79,10 +79,34 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
             /* 6. Use the data */
             
-            guard let studentLocations = parsedResult["results"] as? [[String: AnyObject]] else {
+            guard let rawStudentLocations = parsedResult["results"] as? [[String: AnyObject]] else {
                 displayError("Cannot find key 'results' in \(parsedResult)")
                 return
             }
+            
+            //Check if all data we need is there
+            var studentLocations = [[String: AnyObject]]()
+            
+            for dictionary in rawStudentLocations {
+                let testLat = dictionary["latitude"]
+                let testLong = dictionary["longitude"]
+                let testFirst = dictionary["firstName"]
+                let testLast = dictionary["lastName"]
+                let testMedia = dictionary["mediaURL"]
+                
+                if testLat is Double {
+                    if testLong is Double {
+                        if testFirst is String {
+                            if testLast is String {
+                                if testMedia is String {
+                                    studentLocations.append(dictionary)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             self.createAnnotations(locations: studentLocations)
             Constants.ParseResponseValues.Students = studentLocations
         }
@@ -91,33 +115,29 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func createAnnotations(locations: [[String: AnyObject]]) {
         
-        print(locations)
         // create an MKPointAnnotation for each dictionary
         var annotations = [MKPointAnnotation]()
 
         for dictionary in locations {
             
-            let testLat = dictionary["latitude"]
-            if testLat is Double {
-                let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-                let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-                
-                // Lat and long are used to create a CLLocationCoordinates2D instance.
-                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                
-                let first = dictionary["firstName"] as! String
-                let last = dictionary["lastName"] as! String
-                let mediaURL = dictionary["mediaURL"] as! String
-                
-                // Here we create the annotation and set its coordiate, title, and subtitle properties
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = coordinate
-                annotation.title = "\(first) \(last)"
-                annotation.subtitle = mediaURL
-                
-                // Finally we place the annotation in an array of annotations.
-                annotations.append(annotation)
-            }
+            let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
+            let long = CLLocationDegrees(dictionary["longitude"] as! Double)
+            
+            // Lat and long are used to create a CLLocationCoordinates2D instance.
+            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            
+            let first = dictionary["firstName"] as! String
+            let last = dictionary["lastName"] as! String
+            let mediaURL = dictionary["mediaURL"] as! String
+            
+            // Here we create the annotation and set its coordiate, title, and subtitle properties
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "\(first) \(last)"
+            annotation.subtitle = mediaURL
+            
+            // Finally we place the annotation in an array of annotations.
+            annotations.append(annotation)
         }
         
         // add the annotations to the map.

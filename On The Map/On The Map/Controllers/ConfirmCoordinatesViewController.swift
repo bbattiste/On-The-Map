@@ -61,7 +61,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     // This changes changes the view of the pin and mediaURL
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        let reuseId = "pin"
+        let reuseId = "addPin"
         
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         
@@ -79,19 +79,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    // This delegate method is implemented to respond to taps. It opens the system browser
-    // to the URL specified in the annotationViews subtitle property.
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                app.open(URL(string: toOpen)!, options: [:]) { (_) in
-                }
-            }
-        }
-    }
-    
-    // TODO: add pin customizing/ touch on website to follow link NOT WORKING/ cancel button name to back: and to pop view maybe versus go to view
+    // TODO: add pin customizing/ touch on website to follow link: NOT WORKING/ cancel button name to back: and to pop view maybe versus go to view
     
 
 }
