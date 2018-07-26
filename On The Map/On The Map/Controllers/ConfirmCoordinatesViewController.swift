@@ -91,6 +91,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // TODO: add pin customizing/ touch on website to follow link NOT WORKING/ cancel button name to back: and to pop view maybe versus go to view
     
 
 }

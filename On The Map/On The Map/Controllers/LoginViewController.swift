@@ -39,7 +39,8 @@ class LoginViewController: UIViewController {
         debugTextLabel.text = ""
         
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
-            debugTextLabel.text = "Username or Password Empty."
+            debugTextLabel.text = "Username or Password Empty"
+            return
         }
         //TODO LOGIN: Uncomment
         postSession()
@@ -85,7 +86,15 @@ class LoginViewController: UIViewController {
             }
             // Guard: Is there a succesful HTTP 2XX response?
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                displayError("Your request returned a status code other than 2xx!")
+                displayError("Your request returned a status code other than 2xx! \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
+                performUIUpdatesOnMain {
+                    self.setUIEnabled(true)
+                    if (response as? HTTPURLResponse)?.statusCode == 403 {
+                        self.debugTextLabel.text = "Username or Password Incorrect"
+                    } else {
+                        self.debugTextLabel.text = "Problems with Connection"
+                    }
+                }
                 return
             }
             // Guard: any data returned?

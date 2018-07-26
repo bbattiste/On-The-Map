@@ -48,7 +48,7 @@ struct Constants {
         static let ObjectId = "objectId"
     }
     
-    // MARK: Parse Response Values
+    // MARK: Parse Response Values "StudentInformation"
     struct ParseResponseValues {
         static var Students = [[String: AnyObject]]()
         static var StudentResults = [[String: AnyObject]]()

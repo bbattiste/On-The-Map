@@ -39,7 +39,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @objc func getStudentLocations() {
         
         /* 1/2/3. Set the parameters, Build the URL, Configure the request */
-        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=5")!)
+        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100")!)
         request.addValue(Constants.UdacityParameterValues.ApplicationID, forHTTPHeaderField: Constants.UdacityParameterKeys.ApplicationIDKey)
         request.addValue(Constants.UdacityParameterValues.ApiKeyValue, forHTTPHeaderField: Constants.UdacityParameterKeys.ApiKey)
         
@@ -90,14 +90,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func createAnnotations(locations: [[String: AnyObject]]) {
-
+        
+        print(locations)
         // create an MKPointAnnotation for each dictionary
         var annotations = [MKPointAnnotation]()
 
         for dictionary in locations {
             
             let testLat = dictionary["latitude"]
-            if testLat != nil {
+            if testLat is Double {
                 let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
                 let long = CLLocationDegrees(dictionary["longitude"] as! Double)
                 
