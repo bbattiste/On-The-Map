@@ -186,10 +186,11 @@ class TableViewController: UITableViewController {
     @objc func logOut() {
         // Delete Session
         deleteSession()
+        self.dismiss(animated: false, completion: nil)
         
-        let goToLoginViewController = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        
-        // Pass the created instance to current navigation stack
-        present(goToLoginViewController, animated: true, completion: nil)
+//        let goToLoginViewController = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//
+//        // Pass the created instance to current navigation stack
+//        present(goToLoginViewController, animated: true, completion: nil)
     }
 }

@@ -58,7 +58,6 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         self.mapView.addAnnotations(annotations)
     }
     
-    //TODO: This is not working
     // This changes changes the view of the pin and mediaURL
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         

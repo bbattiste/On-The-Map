@@ -198,10 +198,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // Delete Session
         deleteSession()
-        
-        let goToLoginViewController = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        
-        // Pass the created instance to current navigation stack
-        present(goToLoginViewController, animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
+//        let goToLoginViewController = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//
+//        // Pass the created instance to current navigation stack
+//        present(goToLoginViewController, animated: true, completion: nil)
     }
 }
