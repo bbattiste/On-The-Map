@@ -7,6 +7,7 @@
 //
 
 // Use for easy access in debugging: Battiste1313@gmail.com
+// TesterFirstTesterLast13@gmail.com
 
 import UIKit
 import Foundation
@@ -36,6 +37,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(MapViewController.logOut))
     }
     
+    /*TODO: The app gracefully handles a failure to download student locations.
+     Maybe do an alert view or label...
+    */
     @objc func getStudentLocations() {
         
         /* 1/2/3. Set the parameters, Build the URL, Configure the request */
@@ -99,7 +103,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         if testFirst is String {
                             if testLast is String {
                                 if testMedia is String {
-                                    studentLocations.append(dictionary)
+                                    if (testMedia?.contains("https://"))!{
+                                        studentLocations.append(dictionary)
+                                    }
                                 }
                             }
                         }
@@ -187,6 +193,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         present(goToAddPinViewController, animated: true, completion: nil)
     }
     
+    //TODO: make logout dismiss viewController or present viewController by push not modal after logging in 
     @objc func logOut() {
         
         // Delete Session

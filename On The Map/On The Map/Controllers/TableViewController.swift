@@ -13,7 +13,7 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //MARK: NAV BAR buttons
         
         // Use plus sign for the add location nav button
@@ -104,15 +104,10 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell", for: indexPath)
         let student = Constants.ParseResponseValues.Students[(indexPath as NSIndexPath).row]
-
         
-//        let testFirstName = student["firstName"]
-//        let testLastName = student["lastName"]
-        //if testFirstName != nil || testLastName != nil {
-            let first = student["firstName"] as! String
-            let last = student["lastName"] as! String
-            let mediaURL = student["mediaURL"] as! String
-        //}
+        let first = student["firstName"] as! String
+        let last = student["lastName"] as! String
+        let mediaURL = student["mediaURL"] as! String
         
         // Configure the cell...
         cell.textLabel?.text = "\(first) \(last)"
@@ -127,9 +122,12 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        UIApplication.shared.open(URL(string : "https://auth.udacity.com/sign-up")!, options: [:], completionHandler: { (status) in
+        let student = Constants.ParseResponseValues.Students[(indexPath as NSIndexPath).row]
+        let mediaURL = student["mediaURL"] as! String
+        UIApplication.shared.open(URL(string : mediaURL)!, options: [:], completionHandler: { (status) in
         })
     }
+
     
     /*
     // Override to support conditional editing of the table view.

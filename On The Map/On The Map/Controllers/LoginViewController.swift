@@ -42,9 +42,8 @@ class LoginViewController: UIViewController {
             debugTextLabel.text = "Username or Password Empty"
             return
         }
-        //TODO LOGIN: Uncomment
+
         postSession()
-//        completeLogin()
     }
     
     private func completeLogin() {
@@ -55,7 +54,7 @@ class LoginViewController: UIViewController {
             self.present(controller, animated: true, completion: nil)
         }
     }
-    // TODO LOGIN: Uncomment
+
     private func postSession() {
 
         /* 1/2/3. Set the parameters, Build the URL, Configure the request */
