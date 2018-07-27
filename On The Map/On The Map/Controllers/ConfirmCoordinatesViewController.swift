@@ -5,6 +5,7 @@
 //  Created by Bryan's Air on 7/25/18.
 //  Copyright © 2018 Bryborg Inc. All rights reserved.
 //
+// https://
 
 import UIKit
 import Foundation
@@ -19,12 +20,28 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //TODO: set map to pin location
         createAnnotations()
-        
     }
 
     @IBAction func cancel() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func submit() {
+        print("Constants.ParseResponseValues.IsOnTheMap: \(Constants.ParseResponseValues.IsOnTheMap)")
+        
+        if Constants.ParseResponseValues.IsOnTheMap {
+            print("if Constants.ParseResponseValues.IsOnTheMap is true: updateStudentLocation")
+            self.updateStudentLocation()
+            print("SUCCESS updateStudentLocation")
+        } else {
+            print("if Constants.ParseResponseValues.IsOnTheMap is false: addNewStudentLocation")
+            self.postNewStudentLocation()
+            print("SUCCESS addNewStudentLocation")
+        }
+        
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     func createAnnotations() {
@@ -80,9 +97,40 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
-    
-    // TODO: add pin customizing/ use is OnMap or not to post or put
-    
+    func postNewStudentLocation() {
+        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
+        request.httpMethod = "POST"
+        request.addValue(Constants.UdacityParameterValues.ApplicationID, forHTTPHeaderField: Constants.UdacityParameterKeys.ApplicationIDKey)
+        request.addValue(Constants.UdacityParameterValues.ApiKeyValue, forHTTPHeaderField: Constants.UdacityParameterKeys.ApiKey)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.UdacityResponseValues.AccountKey)\", \"firstName\": \"\(Constants.ParseResponseValues.FirstName)\", \"lastName\": \"\(Constants.ParseResponseValues.LastName)\",\"mapString\": \"\(Constants.ParseResponseValues.MapString)\", \"mediaURL\": \"\(Constants.ParseResponseValues.MediaURL)\",\"latitude\": \(Constants.ParseResponseValues.Latitude), \"longitude\": \(Constants.ParseResponseValues.Longitude)}".data(using: .utf8)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            
+            // if error occurs, print it and re-enable the UI
+            func displayError(_ error: String) {
+                print(error)
+            }
+            
+            // Guard: was there an error?
+            guard (error == nil) else {
+                displayError("There was an error with your request: \(String(describing: error))")
+                return
+            }
+            // Guard: Is there a succesful HTTP 2XX response?
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                displayError("Your request returned a status code other than 2xx! Code# \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
+                return
+            }
+            // Guard: any data returned?
+            guard let data = data else {
+                displayError("No data was returned!")
+                return
+            }
+            print(String(data: data, encoding: .utf8)!)
+        }
+        task.resume()
+    }
     
     func updateStudentLocation() {
         let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.ParseResponseValues.ObjectId)"
@@ -92,7 +140,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         request.addValue(Constants.UdacityParameterValues.ApplicationID, forHTTPHeaderField: Constants.UdacityParameterKeys.ApplicationIDKey)
         request.addValue(Constants.UdacityParameterValues.ApiKeyValue, forHTTPHeaderField: Constants.UdacityParameterKeys.ApiKey)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.UdacityResponseValues.AccountKey)\", \"firstName\": \"\(Constants.ParseResponseValues.FirstName)\", \"lastName\": \"\(Constants.ParseResponseValues.LastName)\",\"mapString\": \"Cupertino, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.322998, \"longitude\": -122.032182}".data(using: .utf8)
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.UdacityResponseValues.AccountKey)\", \"firstName\": \"\(Constants.ParseResponseValues.FirstName)\", \"lastName\": \"\(Constants.ParseResponseValues.LastName)\",\"mapString\": \"\(Constants.ParseResponseValues.MapString)\", \"mediaURL\": \"\(Constants.ParseResponseValues.MediaURL)\",\"latitude\": \(Constants.ParseResponseValues.Latitude), \"longitude\": \(Constants.ParseResponseValues.Longitude)}".data(using: .utf8)
         
         /* 4. Make the request */
         let session = URLSession.shared
@@ -118,9 +166,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
                 displayError("No data was returned!")
                 return
             }
-            
             print(String(data: data, encoding: .utf8)!)
-            
         }
         task.resume()
     }

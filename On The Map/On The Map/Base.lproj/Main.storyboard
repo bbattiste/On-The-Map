@@ -267,14 +267,28 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7H-U4-vRo">
+                                <rect key="frame" x="16" y="613" width="343" height="34"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Submit Location">
+                                    <color key="titleColor" red="0.0" green="0.0030141193479999999" blue="0.70522992230000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="submit" destination="ihl-H5-u0a" eventType="touchUpInside" id="Qon-yT-oyM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ayg-5W-28l" firstAttribute="trailing" secondItem="I3w-c5-NZa" secondAttribute="trailing" id="0Ja-Kv-pqf"/>
                             <constraint firstItem="ayg-5W-28l" firstAttribute="leading" secondItem="I3w-c5-NZa" secondAttribute="leading" id="5LJ-eW-fzk"/>
+                            <constraint firstItem="I3w-c5-NZa" firstAttribute="bottom" secondItem="Z7H-U4-vRo" secondAttribute="bottom" constant="20" id="ENY-93-KYt"/>
                             <constraint firstItem="J7o-9H-FhU" firstAttribute="trailing" secondItem="I3w-c5-NZa" secondAttribute="trailing" id="LS9-Pe-1aI"/>
                             <constraint firstItem="J7o-9H-FhU" firstAttribute="top" secondItem="I3w-c5-NZa" secondAttribute="top" id="WIB-Ny-UaK"/>
                             <constraint firstItem="ayg-5W-28l" firstAttribute="bottom" secondItem="I3w-c5-NZa" secondAttribute="bottom" id="erJ-rd-u2z"/>
+                            <constraint firstItem="I3w-c5-NZa" firstAttribute="trailing" secondItem="Z7H-U4-vRo" secondAttribute="trailing" constant="16" id="jg5-Qc-ISP"/>
+                            <constraint firstItem="Z7H-U4-vRo" firstAttribute="leading" secondItem="I3w-c5-NZa" secondAttribute="leading" constant="16" id="leF-uA-CML"/>
                             <constraint firstItem="ayg-5W-28l" firstAttribute="top" secondItem="J7o-9H-FhU" secondAttribute="bottom" id="mIV-ZJ-JGX"/>
                             <constraint firstItem="J7o-9H-FhU" firstAttribute="leading" secondItem="I3w-c5-NZa" secondAttribute="leading" id="vS0-NN-NEX"/>
                         </constraints>

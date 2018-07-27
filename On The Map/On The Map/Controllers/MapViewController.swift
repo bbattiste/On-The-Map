@@ -17,9 +17,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.getStudentLocations()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        getStudentLocations()
 
         //MARK: NAV BAR buttons
         
@@ -27,7 +30,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let addPinButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 4)!, target: self, action: #selector(MapViewController.addPin))
         
         // Create refresh button:
-        let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 13)!, target: self, action: #selector(MapViewController.viewDidLoad))
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 13)!, target: self, action: #selector(MapViewController.viewWillAppear))
         
         // Add refresh and addPin buttons to right nav bar
         self.navigationItem.rightBarButtonItems = [addPinButton, refreshButton]
@@ -40,7 +43,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     /*TODO: The app gracefully handles a failure to download student locations.
      Maybe do an alert view or label...
     */
-    @objc func getStudentLocations() {
+    func getStudentLocations() {
         
         /* 1/2/3. Set the parameters, Build the URL, Configure the request */
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")!)
@@ -114,9 +117,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     }
                 }
             }
-
-            self.createAnnotations(locations: studentLocations)
+            
             Constants.ParseResponseValues.Students = studentLocations
+            self.createAnnotations(locations: studentLocations)
         }
         task.resume()
     }

@@ -24,15 +24,14 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
 
         navBar.isHidden = false
         
-//        GetPublicUserData()
-//        checkIfStudentIsOnTheMap()
+        GetPublicUserData()
+        checkIfStudentIsOnTheMap()
     }
     
     @IBAction func cancel() {
         dismiss(animated: true, completion: nil)
     }
     
-    // TODO: describe
     func GetPublicUserData() {
         let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/\(Constants.UdacityResponseValues.AccountKey)")!)
         
