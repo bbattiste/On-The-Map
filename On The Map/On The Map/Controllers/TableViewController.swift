@@ -11,6 +11,10 @@ import Foundation
 
 class TableViewController: UITableViewController {
     
+    override func viewWillAppear(_ animated: Bool) {
+        getStudentLocations()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

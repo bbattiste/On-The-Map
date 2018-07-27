@@ -6,6 +6,10 @@
 //  Copyright © 2018 Bryborg Inc. All rights reserved.
 //
 
+import UIKit
+import Foundation
+import MapKit
+
 // MARK: Constants
 struct Constants {
     
@@ -51,7 +55,7 @@ struct Constants {
     // MARK: Parse Response Values "StudentInformation"
     struct ParseResponseValues {
         static var Students = [[String: AnyObject]]()
-        static var StudentResults = [[String: AnyObject]]()
+        static var previousPinArray = [MKPointAnnotation]()
         static var FirstName = ""
         static var LastName = ""
         static var MapString = ""

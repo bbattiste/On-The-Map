@@ -181,6 +181,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                 Constants.ParseResponseValues.Latitude = coordinates.latitude
                 Constants.ParseResponseValues.Longitude = coordinates.longitude
                 Constants.ParseResponseValues.MediaURL = self.websiteTextField.text!
+                Constants.ParseResponseValues.MapString = self.locationTextField.text!
             }
             
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "ConfirmCoordinatesViewController") as! ConfirmCoordinatesViewController

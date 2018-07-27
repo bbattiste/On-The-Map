@@ -151,10 +151,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotations.append(annotation)
         }
         
-        // add the annotations to the map.
+        // clear previous annotations and add the new annotations to the map.
         performUIUpdatesOnMain {
+            self.mapView.removeAnnotations(Constants.ParseResponseValues.previousPinArray)
             self.mapView.addAnnotations(annotations)
+            Constants.ParseResponseValues.previousPinArray = annotations
+            self.viewDidLoad()
         }
+        
     }
     
     // This changes changes the view of the pin and mediaURL
