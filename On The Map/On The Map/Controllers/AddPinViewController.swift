@@ -169,6 +169,12 @@ class AddPinViewController: UIViewController {
                 return
             }
             
+            //check if URL contains "https://"
+            guard self.websiteTextField.text!.contains("https://") else {
+                displayError("Website Must Contain 'https://'")
+                return
+            }
+            
             var coordinateParse: CLLocation?
             coordinateParse = location.first?.location
             if let coordinateParse = coordinateParse {
