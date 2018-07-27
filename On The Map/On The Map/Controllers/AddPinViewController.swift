@@ -11,7 +11,7 @@
 import UIKit
 import MapKit
 
-class AddPinViewController: UIViewController {
+class AddPinViewController: UIViewController, UITextFieldDelegate {
 
     //MARK: outlets and variables
     @IBOutlet weak var navBar: UINavigationBar!
@@ -188,6 +188,27 @@ class AddPinViewController: UIViewController {
             self.present(controller, animated: true, completion: nil)
         }
     }
+    
+    // TextFields to return on enter
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    //  Website textField to include https://
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        updateText(textField)
+    }
+    
+    func updateText(_ textField: UITextField) {
+        if textField == websiteTextField {
+            if websiteTextField.text == "" {
+                websiteTextField.text = "https://"
+            }
+        }
+    }
+    
 }
 
 

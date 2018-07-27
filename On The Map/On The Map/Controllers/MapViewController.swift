@@ -149,7 +149,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         
         // add the annotations to the map.
-        self.mapView.addAnnotations(annotations)
+        performUIUpdatesOnMain {
+            self.mapView.addAnnotations(annotations)
+        }
     }
     
     // This changes changes the view of the pin and mediaURL
@@ -185,8 +187,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    //MARK: Add Pin
-    
+    //MARK: Go To Add Pin View
     @objc func addPin() {
         // Create a instance of Destination AddPinViewController
         let goToAddPinViewController = storyboard?.instantiateViewController(withIdentifier: "AddPinStoryBoard") as! AddPinViewController
