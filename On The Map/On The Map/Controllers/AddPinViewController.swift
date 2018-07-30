@@ -171,6 +171,11 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             //check if URL contains "https://"
             guard self.websiteTextField.text!.contains("https://") else {
                 displayError("Website Must Contain 'https://'")
+                let alert = UIAlertController(title: "Alert", message: "Website Must Contain 'https://'", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
                 return
             }
             

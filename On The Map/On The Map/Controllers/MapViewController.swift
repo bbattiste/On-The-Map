@@ -57,6 +57,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             // if error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
                 print(error)
+                let alert = UIAlertController(title: "Alert", message: error, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
             
             //TODO: Alert View: look at MemeMe app
@@ -81,18 +86,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             do {
                 parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
             } catch {
-                displayError("Could not parse the data as JSON: '\(data)'")
+                //displayError("Could not parse the data as JSON: '\(data)'")
+                displayError("Could not parse the data as JSON")
                 return
             }
 
             /* 6. Use the data */
             
             guard let rawStudentLocations = parsedResult["results"] as? [[String: AnyObject]] else {
-                displayError("Cannot find key 'results' in \(parsedResult)")
+                //displayError("Cannot find key 'results' in \(parsedResult)")
+                displayError("Cannot find key 'results'")
                 return
             }
             
             //TODO: may want to put in a constant var that decides if incomplete student still gets pin, but will not follow links
+            
             //Check if all data we need is there
             var studentLocations = [[String: AnyObject]]()
             
