@@ -168,6 +168,9 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             
+            // Configure website
+            self.websiteTextField.text! = self.checkWebsite(website: self.websiteTextField.text!)
+            
             //check if URL contains "https://"
             guard self.websiteTextField.text!.contains("https://") else {
                 displayError("Website Must Contain 'https://'")
@@ -192,6 +195,19 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "ConfirmCoordinatesViewController") as! ConfirmCoordinatesViewController
             self.present(controller, animated: true, completion: nil)
         }
+    }
+    
+    func checkWebsite(website: String) -> String {
+        if website.contains("https://www.") {
+            return website
+        } else if website.contains("www.") {
+            let websiteNew = website.replacingOccurrences(of: "www.", with: "https://www.")
+            return websiteNew
+        } else {
+            return ("https://www.\(website)")
+        }
+        
+        
     }
     
     // TextFields to return on enter
