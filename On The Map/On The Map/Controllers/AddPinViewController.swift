@@ -198,13 +198,15 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     }
     
     func checkWebsite(website: String) -> String {
-        if website.contains("https://www.") {
+        if website.contains("Enter a Website") || website == "" {
+            return "https://www.udacity.com"
+        } else if website.contains("https://www.") {
             return website
         } else if website.contains("www.") {
             let websiteNew = website.replacingOccurrences(of: "www.", with: "https://www.")
             return websiteNew
         } else {
-            return ("https://www.\(website)")
+            return "https://www.\(website)"
         }
         
         
