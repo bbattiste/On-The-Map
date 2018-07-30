@@ -17,10 +17,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
+    var activityIndicator = UIActivityIndicatorView()
+    
     override func viewWillAppear(_ animated: Bool) {
+        self.activityIndicatorStart()
         self.getStudentLocations()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,6 +41,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         //TODO: link logout with removing all nav stacks
         // create/Add Logout button to left nav bar:
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(MapViewController.logOut))
+        
+        self.activityIndicatorStop()
     }
     
     /*TODO: The app gracefully handles a failure to download student locations.
@@ -200,6 +205,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
             }
         }
+    }
+    
+    func activityIndicatorStart() {
+        
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        
+        activityIndicator.startAnimating()
+        //UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func activityIndicatorStop() {
+        activityIndicator.stopAnimating()
+        //UIApplication.shared.endIgnoringInteractionEvents()
     }
     
     //MARK: Go To Add Pin View
