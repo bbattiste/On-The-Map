@@ -159,6 +159,11 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             // Guard: was there an error?
             guard (error == nil) else {
                 displayError("There was an error with your request: \(String(describing: error))")
+                let alert = UIAlertController(title: "Alert", message: "Invalid Location", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
                 return
             }
             
@@ -167,6 +172,8 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                 displayError("No placemark")
                 return
             }
+            
+            
             
             // Configure website
             self.websiteTextField.text! = self.checkWebsite(website: self.websiteTextField.text!)
