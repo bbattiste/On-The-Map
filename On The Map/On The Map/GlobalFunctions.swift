@@ -72,7 +72,6 @@ func getStudentLocations() {
             print(error)
         }
         
-        //TODO: Alert View: look at MemeMe app
         // Guard: was there an error?
         guard (error == nil) else {
             displayError("There was an error with your request: \(String(describing: error))")
@@ -105,7 +104,7 @@ func getStudentLocations() {
             return
         }
         
-        //TODO: may want to put in a constant var that decides if incomplete student still gets pin, but will not follow links
+        //TODO?: may want to put in a constant var that decides if incomplete student still gets pin, but will not follow links?
         //Check if all data we need is there
         var studentLocations = [[String: AnyObject]]()
         

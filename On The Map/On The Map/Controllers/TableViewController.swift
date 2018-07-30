@@ -29,7 +29,6 @@ class TableViewController: UITableViewController {
         // Add refresh and addPin buttons to right nav bar
         self.navigationItem.rightBarButtonItems = [addPinButton, refreshButton]
         
-        //TODO: link logout with removing all nav stacks
         // create/Add Logout button to left nav bar:
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(TableViewController.logOut))
     

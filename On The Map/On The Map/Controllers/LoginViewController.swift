@@ -6,8 +6,6 @@
 //  Copyright © 2018 Bryborg Inc. All rights reserved.
 //
 
-// Use for easy access in debugging: Battiste1313@gmail.com
-
 import Foundation
 import UIKit
 

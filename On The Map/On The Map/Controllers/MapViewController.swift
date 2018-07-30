@@ -6,9 +6,6 @@
 //  Copyright © 2018 Bryborg Inc. All rights reserved.
 //
 
-// Use for easy access in debugging: Battiste1313@gmail.com
-// TesterFirstTesterLast13@gmail.com
-
 import UIKit
 import Foundation
 import MapKit
@@ -38,16 +35,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Add refresh and addPin buttons to right nav bar
         self.navigationItem.rightBarButtonItems = [addPinButton, refreshButton]
         
-        //TODO: link logout with removing all nav stacks
         // create/Add Logout button to left nav bar:
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(MapViewController.logOut))
         
         self.activityIndicatorStop()
     }
     
-    /*TODO: The app gracefully handles a failure to download student locations.
-     Maybe do an alert view or label...
-    */
     func getStudentLocations() {
         
         /* 1/2/3. Set the parameters, Build the URL, Configure the request */
@@ -69,7 +62,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 self.present(alert, animated: true, completion: nil)
             }
             
-            //TODO: Alert View: look at MemeMe app
             // Guard: was there an error?
             guard (error == nil) else {
                 displayError("There was an error with your request: \(String(describing: error))")
@@ -104,7 +96,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 return
             }
             
-            //TODO: may want to put in a constant var that decides if incomplete student still gets pin, but will not follow links
+            //TODO?: may want to put in a constant var that decides if incomplete student still gets pin, but will not follow links?
             
             //Check if all data we need is there
             var studentLocations = [[String: AnyObject]]()
