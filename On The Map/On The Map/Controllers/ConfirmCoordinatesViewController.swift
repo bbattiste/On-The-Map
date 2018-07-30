@@ -143,6 +143,11 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
             // if error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
                 print(error)
+                let alert = UIAlertController(title: "Alert", message: "Error: Posting of Location has failed", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
             
             // Guard: was there an error?
@@ -182,6 +187,11 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
             // if error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
                 print(error)
+                let alert = UIAlertController(title: "Alert", message: "Error: Posting of Location has failed", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
             
             // Guard: was there an error?
