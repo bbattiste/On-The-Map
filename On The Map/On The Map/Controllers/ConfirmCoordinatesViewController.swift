@@ -17,11 +17,23 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
+    var activityIndicator = UIActivityIndicatorView()
+    let pinLocation = CLLocation(latitude: Constants.ParseResponseValues.Latitude, longitude: Constants.ParseResponseValues.Longitude)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.activityIndicatorStart()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //TODO: set map to pin location
         createAnnotations()
+        mapView.showsUserLocation = true
+        centerMapOnLocation(location: pinLocation)
+        performUIUpdatesOnMain {
+            self.activityIndicatorStop()
+        }
     }
 
     @IBAction func cancel() {
@@ -32,16 +44,36 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         print("Constants.ParseResponseValues.IsOnTheMap: \(Constants.ParseResponseValues.IsOnTheMap)")
         
         if Constants.ParseResponseValues.IsOnTheMap {
-            print("if Constants.ParseResponseValues.IsOnTheMap is true: updateStudentLocation")
             self.updateStudentLocation()
-            print("SUCCESS updateStudentLocation")
         } else {
-            print("if Constants.ParseResponseValues.IsOnTheMap is false: addNewStudentLocation")
             self.postNewStudentLocation()
-            print("SUCCESS addNewStudentLocation")
         }
         
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    // Configure zoom on pinLocation
+    func centerMapOnLocation(location: CLLocation) {
+        let regionRadius: CLLocationDistance = 2000
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
+                                                                  regionRadius * 2.0, regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    func activityIndicatorStart() {
+        
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        
+        activityIndicator.startAnimating()
+        //UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func activityIndicatorStop() {
+        activityIndicator.stopAnimating()
+        //UIApplication.shared.endIgnoringInteractionEvents()
     }
     
     func createAnnotations() {
@@ -74,6 +106,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         // add the annotations to the map.
         performUIUpdatesOnMain {
             self.mapView.addAnnotations(annotations)
+            self.activityIndicatorStop()
         }
     }
     
