@@ -36,10 +36,14 @@ class LoginViewController: UIViewController {
     // MARK: Login
     
     @IBAction func login(_ sender: AnyObject) {
+        
+        self.loginButton.isEnabled = false
+        
         debugTextLabel.text = ""
         
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             debugTextLabel.text = "Username or Password Empty"
+            self.loginButton.isEnabled = true
             return
         } else {
             Constants.UdacityParameterValues.Username = usernameTextField.text!
@@ -51,6 +55,7 @@ class LoginViewController: UIViewController {
                 self.completeLogin()
             } else {
                 self.displayError(error!)
+                self.loginButton.isEnabled = true
             }
         }
     }
@@ -61,6 +66,7 @@ class LoginViewController: UIViewController {
             self.setUIEnabled(true)
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapsTabBarController") as! UITabBarController
             self.present(controller, animated: true, completion: nil)
+            self.loginButton.isEnabled = true
         }
     }
     
