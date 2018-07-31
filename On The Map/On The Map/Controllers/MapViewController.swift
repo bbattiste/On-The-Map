@@ -17,10 +17,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var activityIndicator = UIActivityIndicatorView()
     
     override func viewWillAppear(_ animated: Bool) {
+        self.activityIndicator.transform = CGAffineTransform(scaleX: 3, y: 3)
         self.activityIndicatorStart()
         self.getStudentLocations()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
