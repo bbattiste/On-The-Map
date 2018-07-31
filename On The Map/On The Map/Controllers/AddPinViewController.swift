@@ -77,8 +77,8 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             
-            Constants.ParseResponseValues.LastName = user["last_name"] as! String
-            Constants.ParseResponseValues.FirstName = user["first_name"] as! String
+            Constants.StudentInformation.LastName = user["last_name"] as! String
+            Constants.StudentInformation.FirstName = user["first_name"] as! String
         }
         task.resume()
     }
@@ -132,13 +132,13 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             
             if results.isEmpty == true {
                 print("no results")
-                Constants.ParseResponseValues.IsOnTheMap = false
+                Constants.StudentInformation.IsOnTheMap = false
                 return
             } else {
                 print("yes array")
-                Constants.ParseResponseValues.IsOnTheMap = true
+                Constants.StudentInformation.IsOnTheMap = true
                 let student = results[0] as [String: AnyObject]
-                Constants.ParseResponseValues.ObjectId = student["objectId"] as! String
+                Constants.StudentInformation.ObjectId = student["objectId"] as! String
             }
         }
         task.resume()
@@ -191,10 +191,10 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             coordinateParse = location.first?.location
             if let coordinateParse = coordinateParse {
                 let coordinates = coordinateParse.coordinate
-                Constants.ParseResponseValues.Latitude = coordinates.latitude
-                Constants.ParseResponseValues.Longitude = coordinates.longitude
-                Constants.ParseResponseValues.MediaURL = self.websiteTextField.text!
-                Constants.ParseResponseValues.MapString = self.locationTextField.text!
+                Constants.StudentInformation.Latitude = coordinates.latitude
+                Constants.StudentInformation.Longitude = coordinates.longitude
+                Constants.StudentInformation.MediaURL = self.websiteTextField.text!
+                Constants.StudentInformation.MapString = self.locationTextField.text!
             }
             
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "ConfirmCoordinatesViewController") as! ConfirmCoordinatesViewController

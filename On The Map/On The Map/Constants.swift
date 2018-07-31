@@ -53,7 +53,7 @@ struct Constants {
     }
     
     // MARK: Parse Response Values "StudentInformation"
-    struct ParseResponseValues {
+    struct StudentInformation: Codable {
         static var Students = [[String: AnyObject]]()
         static var previousPinArray = [MKPointAnnotation]()
         static var FirstName = ""

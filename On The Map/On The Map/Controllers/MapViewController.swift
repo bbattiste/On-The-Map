@@ -124,7 +124,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
             }
             
-            Constants.ParseResponseValues.Students = studentLocations
+            Constants.StudentInformation.Students = studentLocations
             self.createAnnotations(locations: studentLocations)
         }
         task.resume()
@@ -159,9 +159,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // clear previous annotations and add the new annotations to the map.
         performUIUpdatesOnMain {
-            self.mapView.removeAnnotations(Constants.ParseResponseValues.previousPinArray)
+            self.mapView.removeAnnotations(Constants.StudentInformation.previousPinArray)
             self.mapView.addAnnotations(annotations)
-            Constants.ParseResponseValues.previousPinArray = annotations
+            Constants.StudentInformation.previousPinArray = annotations
             self.viewDidLoad()
         }
         

@@ -130,7 +130,7 @@ func getStudentLocations() {
             }
         }
         
-        Constants.ParseResponseValues.Students = studentLocations
+        Constants.StudentInformation.Students = studentLocations
     }
     task.resume()
 }
