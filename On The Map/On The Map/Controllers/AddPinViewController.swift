@@ -176,16 +176,16 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             // Configure website
             self.websiteTextField.text! = self.checkWebsite(website: self.websiteTextField.text!)
             
-            //check if URL contains "https://"
-            guard self.websiteTextField.text!.contains("https://") else {
-                displayError("Website Must Contain 'https://'")
-                let alert = UIAlertController(title: "Alert", message: "Website Must Contain 'https://'", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                    NSLog("The \"OK\" alert occured.")
-                }))
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
+//            //check if URL contains "https://"
+//            guard self.websiteTextField.text!.contains("https://") else {
+//                displayError("Website Must Contain 'https://'")
+//                let alert = UIAlertController(title: "Alert", message: "Website Must Contain 'https://'", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+//                    NSLog("The \"OK\" alert occured.")
+//                }))
+//                self.present(alert, animated: true, completion: nil)
+//                return
+//            }
             
             var coordinateParse: CLLocation?
             coordinateParse = location.first?.location
@@ -205,7 +205,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     func checkWebsite(website: String) -> String {
         if website.contains("Enter a Website") || website == "" {
             return "https://www.udacity.com"
-        } else if website.contains("https://www.") {
+        } else if website.contains("https://www.") || website.contains("http://www.") {
             return website
         } else if website.contains("www.") {
             let websiteNew = website.replacingOccurrences(of: "www.", with: "https://www.")
@@ -213,8 +213,6 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         } else {
             return "https://www.\(website)"
         }
-        
-        
     }
     
     // TextFields to return on enter
