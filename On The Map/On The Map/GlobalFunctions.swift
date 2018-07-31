@@ -135,3 +135,69 @@ func getStudentLocations() {
     task.resume()
 }
 
+func postSession(completionHandler: @escaping (_ success: Bool, _ error: String?) -> Void) {
+    
+    /* 1/2/3. Set the parameters, Build the URL, Configure the request */
+    
+    var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Accept")
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.httpBody = "{\"\(Constants.UdacityParameterKeys.Dictionary)\": {\"\(Constants.UdacityParameterKeys.Username)\": \"\(Constants.UdacityParameterValues.Username)\", \"\(Constants.UdacityParameterKeys.Password)\": \"\(Constants.UdacityParameterValues.Password)\"}}".data(using: .utf8)
+    
+    /* 4. Make the request */
+    let session = URLSession.shared
+    let task = session.dataTask(with: request) { data, response, error in
+        
+        // Guard: was there an error?
+        guard (error == nil) else {
+            completionHandler(false, "Login Failed")
+            return
+        }
+        
+        // Guard: Is there a succesful HTTP 2XX response?
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+            print("Your request returned a status code other than 2xx! \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
+            if (response as? HTTPURLResponse)?.statusCode == 403 {
+                completionHandler(false, "Username or Password Incorrect")
+            } else {
+                completionHandler(false, "Problems with Connection")
+            }
+            return
+        }
+        
+        // Guard: any data returned?
+        guard let data = data else {
+            completionHandler(false, "No data was returned!")
+            return
+        }
+        
+        let range = Range(5..<data.count)
+        let newData = data.subdata(in: range) /* subset response data! */
+        
+        /* 5. Parse the data */
+        let parsedResult: [String:AnyObject]!
+        do {
+            parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String:AnyObject]
+        } catch {
+            print("Could not parse the data as JSON: '\(String(data: newData, encoding: .utf8)!)'")
+            completionHandler(false, "Could not parse the data as JSON")
+            return
+        }
+        
+        /* 6. Use the data */
+        
+        guard let account = parsedResult["account"] as? [String: AnyObject] else {
+            print("Cannot find key 'account'")
+            completionHandler(false, "Cannot find key 'account' in \(parsedResult)")
+            return
+        }
+        
+        Constants.UdacityResponseValues.AccountKey = account["key"] as! String
+        
+        print("***login success***")
+        print("Constants.UdacityResponseValues.AccountKey = \(Constants.UdacityResponseValues.AccountKey)")
+        completionHandler(true, nil)
+    }
+    task.resume()
+}

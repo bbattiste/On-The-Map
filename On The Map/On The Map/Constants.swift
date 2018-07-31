@@ -33,6 +33,8 @@ struct Constants {
     struct UdacityParameterValues {
         static let ApiKeyValue = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
         static let ApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
+        static var Username = ""
+        static var Password = ""
     }
     
     // MARK: Udacity Response Values

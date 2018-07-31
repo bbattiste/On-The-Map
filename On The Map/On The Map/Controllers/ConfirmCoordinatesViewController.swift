@@ -20,7 +20,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     let pinLocation = CLLocation(latitude: Constants.StudentInformation.Latitude, longitude: Constants.StudentInformation.Longitude)
     
     override func viewWillAppear(_ animated: Bool) {
-        self.activityIndicator.transform = CGAffineTransform(scaleX: 3, y: 3)
+        self.activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
         self.activityIndicatorStart()
     }
     
