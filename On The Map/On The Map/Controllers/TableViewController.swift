@@ -13,7 +13,16 @@ class TableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        getStudentLocations()
+        
+        getStudentLocations() { (success, error) in
+            if success {
+            } else {
+                performUIUpdatesOnMain {
+                    self.displayError(error!)
+                }
+            }
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -32,6 +41,14 @@ class TableViewController: UITableViewController {
         
         // create/Add Logout button to left nav bar:
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(TableViewController.logOut))
+    }
+    
+    func displayError(_ error: String) {
+        let alert = UIAlertController(title: "Alert", message: "\(error)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

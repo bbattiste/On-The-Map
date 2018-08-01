@@ -59,7 +59,7 @@ func deleteSession() {
     task.resume()
 }
 
-func getStudentLocations() {
+func getStudentLocations(completionHandler: @escaping (_ success: Bool, _ error: String?) -> Void) {
     
     /* 1/2/3. Set the parameters, Build the URL, Configure the request */
     var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")!)
@@ -70,28 +70,19 @@ func getStudentLocations() {
     let session = URLSession.shared
     let task = session.dataTask(with: request) { data, response, error in
         
-        func displayError(_ error: String) {
-//            TODO
-//            let alert = UIAlertController(title: "Alert", message: "Error getting student locations \(error)", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-//                NSLog("The \"OK\" alert occured.")
-//            }))
-//            self.present(alert, animated: true, completion: nil)
-        }
-        
         // Guard: was there an error?
         guard (error == nil) else {
-            displayError("There was an error with your request: \(String(describing: error))")
+            completionHandler(false, "There was an error with your request: \(String(describing: error))")
             return
         }
         // Guard: Is there a succesful HTTP 2XX response?
         guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-            displayError("Your request returned a status code other than 2xx!")
+            completionHandler(false, "Your request returned a status code other than 2xx!")
             return
         }
         // Guard: any data returned?
         guard let data = data else {
-            displayError("No data was returned!")
+            completionHandler(false, "No data was returned!")
             return
         }
         
@@ -100,14 +91,14 @@ func getStudentLocations() {
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
         } catch {
-            displayError("Could not parse the data as JSON: '\(data)'")
+            completionHandler(false, "Could not parse the data as JSON")
             return
         }
         
         /* 6. Use the data */
         
         guard let rawStudentLocations = parsedResult["results"] as? [[String: AnyObject]] else {
-            displayError("Cannot find key 'results' in \(parsedResult)")
+            completionHandler(false, "Cannot find key 'results'")
             return
         }
         
@@ -138,6 +129,7 @@ func getStudentLocations() {
         }
         
         StudentModel.Students = studentLocations
+        completionHandler(true, nil)
     }
     task.resume()
 }
@@ -193,7 +185,7 @@ func postSession(completionHandler: @escaping (_ success: Bool, _ error: String?
         /* 6. Use the data */
         
         guard let account = parsedResult["account"] as? [String: AnyObject] else {
-            completionHandler(false, "Cannot find key 'account' in \(parsedResult)")
+            completionHandler(false, "Cannot find key 'account'")
             return
         }
         
