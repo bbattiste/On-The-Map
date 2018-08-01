@@ -17,6 +17,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var activityIndicatorMap: UIActivityIndicatorView!
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.activityIndicatorMap.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         activityIndicatorMap.startAnimating()
         self.getStudentLocations()

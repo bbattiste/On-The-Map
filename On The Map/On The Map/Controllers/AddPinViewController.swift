@@ -18,17 +18,62 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var websiteTextField: UITextField!
     @IBOutlet weak var activityIndicatorAddPin: UIActivityIndicatorView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        navBar.isHidden = false
-        
-        GetPublicUserData()
-        checkIfStudentIsOnTheMap()
-    }
-    
     @IBAction func cancel() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func getLatLong() {
+        
+        self.activityIndicatorAddPin.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        self.activityIndicatorAddPin.startAnimating()
+        var geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(self.locationTextField.text!) { (placemark, error) in
+            
+            func displayError(_ error: String) {
+                let alert = UIAlertController(title: "Alert", message: "Invalid Location", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+                self.activityIndicatorAddPin.stopAnimating()
+            }
+            
+            // Guard: was there an error?
+            guard (error == nil) else {
+                displayError("There was an error with your request: \(String(describing: error))")
+                return
+            }
+            
+            // Parse placemark results
+            guard let location = placemark else {
+                displayError("No placemark")
+                return
+            }
+            
+            // Store Lat/long/textFields
+            self.websiteTextField.text! = self.checkWebsite(website: self.websiteTextField.text!)
+            var coordinateParse: CLLocation?
+            coordinateParse = location.first?.location
+            if let coordinateParse = coordinateParse {
+                let coordinates = coordinateParse.coordinate
+                Constants.StudentInformation.Latitude = coordinates.latitude
+                Constants.StudentInformation.Longitude = coordinates.longitude
+                Constants.StudentInformation.MediaURL = self.websiteTextField.text!
+                Constants.StudentInformation.MapString = self.locationTextField.text!
+            }
+            
+            let controller = self.storyboard!.instantiateViewController(withIdentifier: "ConfirmCoordinatesViewController") as! ConfirmCoordinatesViewController
+            self.present(controller, animated: true, completion: nil)
+            self.activityIndicatorAddPin.stopAnimating()
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navBar.isHidden = false
+        GetPublicUserData()
+        checkIfStudentIsOnTheMap()
     }
     
     func GetPublicUserData() {
@@ -120,7 +165,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                 displayError("No data was returned!")
                 return
             }
-
+            
             /* 5. Parse the data */
             let parsedResult: [String:AnyObject]!
             do {
@@ -149,52 +194,6 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         task.resume()
     }
     
-    @IBAction func getLatLong() {
-        
-        self.activityIndicatorAddPin.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-        self.activityIndicatorAddPin.startAnimating()
-        var geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(self.locationTextField.text!) { (placemark, error) in
-            
-            func displayError(_ error: String) {
-                let alert = UIAlertController(title: "Alert", message: "Invalid Location", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                    NSLog("The \"OK\" alert occured.")
-                }))
-                self.present(alert, animated: true, completion: nil)
-                self.activityIndicatorAddPin.stopAnimating()
-            }
-            
-            // Guard: was there an error?
-            guard (error == nil) else {
-                displayError("There was an error with your request: \(String(describing: error))")
-                return
-            }
-            
-            // Parse placemark results
-            guard let location = placemark else {
-                displayError("No placemark")
-                return
-            }
-            
-            // Store Lat/long/textFields
-            self.websiteTextField.text! = self.checkWebsite(website: self.websiteTextField.text!)
-            var coordinateParse: CLLocation?
-            coordinateParse = location.first?.location
-            if let coordinateParse = coordinateParse {
-                let coordinates = coordinateParse.coordinate
-                Constants.StudentInformation.Latitude = coordinates.latitude
-                Constants.StudentInformation.Longitude = coordinates.longitude
-                Constants.StudentInformation.MediaURL = self.websiteTextField.text!
-                Constants.StudentInformation.MapString = self.locationTextField.text!
-            }
-            
-            let controller = self.storyboard!.instantiateViewController(withIdentifier: "ConfirmCoordinatesViewController") as! ConfirmCoordinatesViewController
-            self.present(controller, animated: true, completion: nil)
-            self.activityIndicatorAddPin.stopAnimating()
-        }
-    }
-    
     func checkWebsite(website: String) -> String {
         if website.contains("Enter a Website") || website == "" {
             return "https://www.udacity.com"
@@ -207,26 +206,27 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             return "https://www.\(website)"
         }
     }
-    
-    // TextFields to return on enter
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    //  Website textField to include https://
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        updateText(textField)
-    }
-    
-    func updateText(_ textField: UITextField) {
-        if textField == websiteTextField {
-            if websiteTextField.text == "" {
-                websiteTextField.text = "https://"
-            }
-        }
-    }
+
+    // The following code is to add textField options: Is incomplete, will come back to
+//    // TextFields to return on enter
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//
+//    //  Website textField to include https://
+//
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        updateText(textField)
+//    }
+//
+//    func updateText(_ textField: UITextField) {
+//        if textField == websiteTextField {
+//            if websiteTextField.text == "" {
+//                websiteTextField.text = "https://"
+//            }
+//        }
+//    }
     
 }
 
