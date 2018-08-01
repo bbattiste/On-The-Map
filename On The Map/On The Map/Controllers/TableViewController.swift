@@ -42,8 +42,8 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell", for: indexPath)
         let student = Constants.StudentInformation.Students[(indexPath as NSIndexPath).row]
         
-        let first = student["firstName"] as! String
-        let last = student["lastName"] as! String
+        let first = (student["firstName"] as! String).capitalized
+        let last = (student["lastName"] as! String).capitalized
         let mediaURL = student["mediaURL"] as! String
         
         // Configure the cell...
