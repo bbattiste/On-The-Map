@@ -18,9 +18,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.activityIndicatorMap.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        activityIndicatorMap.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         activityIndicatorMap.startAnimating()
-        self.getStudentLocations()
+        getStudentLocations()
     }
     
     override func viewDidLoad() {
@@ -35,10 +35,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 13)!, target: self, action: #selector(MapViewController.viewWillAppear))
         
         // Add refresh and addPin buttons to right nav bar
-        self.navigationItem.rightBarButtonItems = [addPinButton, refreshButton]
+        navigationItem.rightBarButtonItems = [addPinButton, refreshButton]
         
         // create/Add Logout button to left nav bar:
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(MapViewController.logOut))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(MapViewController.logOut))
         
         activityIndicatorMap.stopAnimating()
     }

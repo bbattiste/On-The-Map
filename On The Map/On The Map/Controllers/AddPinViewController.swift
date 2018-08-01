@@ -24,10 +24,10 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func getLatLong() {
         
-        self.activityIndicatorAddPin.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-        self.activityIndicatorAddPin.startAnimating()
+        activityIndicatorAddPin.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        activityIndicatorAddPin.startAnimating()
         var geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(self.locationTextField.text!) { (placemark, error) in
+        geocoder.geocodeAddressString(locationTextField.text!) { (placemark, error) in
             
             func displayError(_ error: String) {
                 let alert = UIAlertController(title: "Alert", message: "Invalid Location", preferredStyle: .alert)

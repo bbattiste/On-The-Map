@@ -28,10 +28,10 @@ class TableViewController: UITableViewController {
         let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem(rawValue: 13)!, target: self, action: #selector(TableViewController.viewDidLoad))
         
         // Add refresh and addPin buttons to right nav bar
-        self.navigationItem.rightBarButtonItems = [addPinButton, refreshButton]
+        navigationItem.rightBarButtonItems = [addPinButton, refreshButton]
         
         // create/Add Logout button to left nav bar:
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(TableViewController.logOut))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(TableViewController.logOut))
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,6 +77,6 @@ class TableViewController: UITableViewController {
     @objc func logOut() {
         // Delete Session
         deleteSession()
-        self.dismiss(animated: false, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
 }

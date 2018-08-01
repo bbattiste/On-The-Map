@@ -24,12 +24,12 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     }
     @IBAction func submit() {
         if Constants.StudentInformation.IsOnTheMap {
-            self.updateStudentLocation()
+            updateStudentLocation()
         } else {
-            self.postNewStudentLocation()
+            postNewStudentLocation()
         }
         
-        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     // MARK: Vars/Lets
@@ -38,7 +38,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     // MARK: Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.activityIndicatorCoord.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        activityIndicatorCoord.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         activityIndicatorCoord.startAnimating()
     }
     
@@ -88,26 +88,6 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
             self.mapView.addAnnotations(annotations)
         }
     }
-    
-    // The following code is to make visual changes to the pin: Is incomplete, but can come back to if needed
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//
-//        let reuseId = "pin"
-//
-//        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-//
-//        if pinView == nil {
-//            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-//            pinView!.canShowCallout = true
-//            pinView!.pinTintColor = .red
-//            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-//        }
-//        else {
-//            pinView!.annotation = annotation
-//        }
-//
-//        return pinView
-//    }
     
     func postNewStudentLocation() {
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
@@ -186,4 +166,25 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         }
         task.resume()
     }
+    
+    // The following code is to make visual changes to the pin: Is incomplete, but can come back to if needed
+    //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    //
+    //        let reuseId = "pin"
+    //
+    //        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+    //
+    //        if pinView == nil {
+    //            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+    //            pinView!.canShowCallout = true
+    //            pinView!.pinTintColor = .red
+    //            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+    //        }
+    //        else {
+    //            pinView!.annotation = annotation
+    //        }
+    //
+    //        return pinView
+    //    }
+
 }

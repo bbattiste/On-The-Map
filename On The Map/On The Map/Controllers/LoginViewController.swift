@@ -38,16 +38,16 @@ class LoginViewController: UIViewController {
     
     @IBAction func login(_ sender: AnyObject) {
         
-        self.activityIndicatorLogin.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-        self.activityIndicatorLogin.startAnimating()
-        self.loginButton.isEnabled = false
+        activityIndicatorLogin.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        activityIndicatorLogin.startAnimating()
+        loginButton.isEnabled = false
         
         debugTextLabel.text = ""
         
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             debugTextLabel.text = "Username or Password Empty"
-            self.loginButton.isEnabled = true
-            self.activityIndicatorLogin.stopAnimating()
+            loginButton.isEnabled = true
+            activityIndicatorLogin.stopAnimating()
             return
         } else {
             Constants.UdacityParameterValues.Username = usernameTextField.text!
