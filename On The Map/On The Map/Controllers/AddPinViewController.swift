@@ -56,10 +56,10 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             coordinateParse = location.first?.location
             if let coordinateParse = coordinateParse {
                 let coordinates = coordinateParse.coordinate
-                Constants.StudentInformation.Latitude = coordinates.latitude
-                Constants.StudentInformation.Longitude = coordinates.longitude
-                Constants.StudentInformation.MediaURL = self.websiteTextField.text!
-                Constants.StudentInformation.MapString = self.locationTextField.text!
+                StudentModel.StudentInformation.Latitude = coordinates.latitude
+                StudentModel.StudentInformation.Longitude = coordinates.longitude
+                StudentModel.StudentInformation.MediaURL = self.websiteTextField.text!
+                StudentModel.StudentInformation.MapString = self.locationTextField.text!
             }
             
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "ConfirmCoordinatesViewController") as! ConfirmCoordinatesViewController
@@ -126,8 +126,8 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             
-            Constants.StudentInformation.LastName = user["last_name"] as! String
-            Constants.StudentInformation.FirstName = user["first_name"] as! String
+            StudentModel.StudentInformation.LastName = user["last_name"] as! String
+            StudentModel.StudentInformation.FirstName = user["first_name"] as! String
         }
         task.resume()
     }
@@ -183,12 +183,12 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             }
             
             if results.isEmpty == true {
-                Constants.StudentInformation.IsOnTheMap = false
+                StudentModel.StudentInformation.IsOnTheMap = false
                 return
             } else {
-                Constants.StudentInformation.IsOnTheMap = true
+                StudentModel.StudentInformation.IsOnTheMap = true
                 let student = results[0] as [String: AnyObject]
-                Constants.StudentInformation.ObjectId = student["objectId"] as! String
+                StudentModel.StudentInformation.ObjectId = student["objectId"] as! String
             }
         }
         task.resume()

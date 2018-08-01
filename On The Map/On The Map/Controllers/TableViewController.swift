@@ -35,12 +35,12 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Constants.StudentInformation.Students.count
+        return StudentModel.Students.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell", for: indexPath)
-        let student = Constants.StudentInformation.Students[(indexPath as NSIndexPath).row]
+        let student = StudentModel.Students[(indexPath as NSIndexPath).row]
         
         let first = (student["firstName"] as! String).capitalized
         let last = (student["lastName"] as! String).capitalized
@@ -59,7 +59,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let student = Constants.StudentInformation.Students[(indexPath as NSIndexPath).row]
+        let student = StudentModel.Students[(indexPath as NSIndexPath).row]
         let mediaURL = student["mediaURL"] as! String
         UIApplication.shared.open(URL(string : mediaURL)!, options: [:], completionHandler: { (status) in
         })

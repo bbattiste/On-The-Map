@@ -137,7 +137,7 @@ func getStudentLocations() {
             }
         }
         
-        Constants.StudentInformation.Students = studentLocations
+        StudentModel.Students = studentLocations
     }
     task.resume()
 }

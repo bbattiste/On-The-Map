@@ -23,7 +23,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         dismiss(animated: true, completion: nil)
     }
     @IBAction func submit() {
-        if Constants.StudentInformation.IsOnTheMap {
+        if StudentModel.StudentInformation.IsOnTheMap {
             updateStudentLocation()
         } else {
             postNewStudentLocation()
@@ -33,7 +33,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     }
     
     // MARK: Vars/Lets
-    let pinLocation = CLLocation(latitude: Constants.StudentInformation.Latitude, longitude: Constants.StudentInformation.Longitude)
+    let pinLocation = CLLocation(latitude: StudentModel.StudentInformation.Latitude, longitude: StudentModel.StudentInformation.Longitude)
     
     // MARK: Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -64,15 +64,15 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         var annotations = [MKPointAnnotation]()
         
         
-            let lat = CLLocationDegrees(Constants.StudentInformation.Latitude)
-            let long = CLLocationDegrees(Constants.StudentInformation.Longitude)
+            let lat = CLLocationDegrees(StudentModel.StudentInformation.Latitude)
+            let long = CLLocationDegrees(StudentModel.StudentInformation.Longitude)
         
             // Lat and long are used to create a CLLocationCoordinates2D instance.
             let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         
-            let first = Constants.StudentInformation.FirstName
-            let last = Constants.StudentInformation.LastName
-            let mediaURL = Constants.StudentInformation.MediaURL
+            let first = StudentModel.StudentInformation.FirstName
+            let last = StudentModel.StudentInformation.LastName
+            let mediaURL = StudentModel.StudentInformation.MediaURL
         
             // Here we create the annotation and set its coordiate, title, and subtitle properties
             let annotation = MKPointAnnotation()
@@ -95,7 +95,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         request.addValue(Constants.UdacityParameterValues.ApplicationID, forHTTPHeaderField: Constants.UdacityParameterKeys.ApplicationIDKey)
         request.addValue(Constants.UdacityParameterValues.ApiKeyValue, forHTTPHeaderField: Constants.UdacityParameterKeys.ApiKey)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.UdacityResponseValues.AccountKey)\", \"firstName\": \"\(Constants.StudentInformation.FirstName)\", \"lastName\": \"\(Constants.StudentInformation.LastName)\",\"mapString\": \"\(Constants.StudentInformation.MapString)\", \"mediaURL\": \"\(Constants.StudentInformation.MediaURL)\",\"latitude\": \(Constants.StudentInformation.Latitude), \"longitude\": \(Constants.StudentInformation.Longitude)}".data(using: .utf8)
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.UdacityResponseValues.AccountKey)\", \"firstName\": \"\(StudentModel.StudentInformation.FirstName)\", \"lastName\": \"\(StudentModel.StudentInformation.LastName)\",\"mapString\": \"\(StudentModel.StudentInformation.MapString)\", \"mediaURL\": \"\(StudentModel.StudentInformation.MediaURL)\",\"latitude\": \(StudentModel.StudentInformation.Latitude), \"longitude\": \(StudentModel.StudentInformation.Longitude)}".data(using: .utf8)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             
@@ -127,14 +127,14 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     }
     
     func updateStudentLocation() {
-        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.StudentInformation.ObjectId)"
+        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(StudentModel.StudentInformation.ObjectId)"
         let url = URL(string: urlString)
         var request = URLRequest(url: url!)
         request.httpMethod = "PUT"
         request.addValue(Constants.UdacityParameterValues.ApplicationID, forHTTPHeaderField: Constants.UdacityParameterKeys.ApplicationIDKey)
         request.addValue(Constants.UdacityParameterValues.ApiKeyValue, forHTTPHeaderField: Constants.UdacityParameterKeys.ApiKey)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.UdacityResponseValues.AccountKey)\", \"firstName\": \"\(Constants.StudentInformation.FirstName)\", \"lastName\": \"\(Constants.StudentInformation.LastName)\",\"mapString\": \"\(Constants.StudentInformation.MapString)\", \"mediaURL\": \"\(Constants.StudentInformation.MediaURL)\",\"latitude\": \(Constants.StudentInformation.Latitude), \"longitude\": \(Constants.StudentInformation.Longitude)}".data(using: .utf8)
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.UdacityResponseValues.AccountKey)\", \"firstName\": \"\(StudentModel.StudentInformation.FirstName)\", \"lastName\": \"\(StudentModel.StudentInformation.LastName)\",\"mapString\": \"\(StudentModel.StudentInformation.MapString)\", \"mediaURL\": \"\(StudentModel.StudentInformation.MediaURL)\",\"latitude\": \(StudentModel.StudentInformation.Latitude), \"longitude\": \(StudentModel.StudentInformation.Longitude)}".data(using: .utf8)
         
         /* 4. Make the request */
         let session = URLSession.shared

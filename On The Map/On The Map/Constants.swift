@@ -43,28 +43,14 @@ struct Constants {
     }
     
     // MARK: Parse Parameter Values
-    struct ParseParameterValues {
-        static let UniqueKey = "uniqueKey" // Parse UniqueKey is Udacity AccountKey
-        static let FirstName = "firstName"
-        static let LastName = "lastName"
-        static let MapString = "mapString"
-        static let MediaURL = "mediaURL"
-        static let Latitude = "latitude"
-        static let Longitude = "longitude"
-        static let ObjectId = "objectId"
-    }
-    
-    // MARK: Parse Response Values "StudentInformation"
-    struct StudentInformation: Codable {
-        static var Students = [[String: AnyObject]]()
-        static var previousPinArray = [MKPointAnnotation]()
-        static var FirstName = ""
-        static var LastName = ""
-        static var MapString = ""
-        static var MediaURL = ""
-        static var Latitude: Double = 0
-        static var Longitude: Double = 0
-        static var ObjectId = ""
-        static var IsOnTheMap = false
-    }
+//    struct ParseParameterValues {
+//        static let UniqueKey = "uniqueKey" // Parse UniqueKey is Udacity AccountKey
+//        static let FirstName = "firstName"
+//        static let LastName = "lastName"
+//        static let MapString = "mapString"
+//        static let MediaURL = "mediaURL"
+//        static let Latitude = "latitude"
+//        static let Longitude = "longitude"
+//        static let ObjectId = "objectId"
+//    }
 }

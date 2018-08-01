@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13170BE7211247B10046BEAB /* StudentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13170BE6211247B00046BEAB /* StudentModel.swift */; };
 		134BCF2020EAD054001FC370 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF1F20EAD054001FC370 /* LoginViewController.swift */; };
 		134BCF2220EBD5FB001FC370 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF2120EBD5FB001FC370 /* MapViewController.swift */; };
 		134BCF2420EBD989001FC370 /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF2320EBD989001FC370 /* AddPinViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13170BE6211247B00046BEAB /* StudentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentModel.swift; sourceTree = "<group>"; };
 		134BCF1F20EAD054001FC370 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		134BCF2120EBD5FB001FC370 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		134BCF2320EBD989001FC370 /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				134BCF2920F3E7BF001FC370 /* Constants.swift */,
 				13C66DBD20F50A2E0066688E /* GCD.swift */,
 				13EA11DB20FEC75100D4F1AF /* GlobalFunctions.swift */,
+				13170BE6211247B00046BEAB /* StudentModel.swift */,
 				13EE77842108F3AC0098F82C /* Controllers */,
 				13AC601B20DD7D4300D2C8C5 /* Main.storyboard */,
 				13AC601E20DD7D4300D2C8C5 /* Assets.xcassets */,
@@ -168,6 +171,7 @@
 				13EE7786210903AD0098F82C /* ConfirmCoordinatesViewController.swift in Sources */,
 				13C66DBE20F50A2E0066688E /* GCD.swift in Sources */,
 				134BCF2420EBD989001FC370 /* AddPinViewController.swift in Sources */,
+				13170BE7211247B10046BEAB /* StudentModel.swift in Sources */,
 				13EA11DC20FEC75100D4F1AF /* GlobalFunctions.swift in Sources */,
 				134BCF2020EAD054001FC370 /* LoginViewController.swift in Sources */,
 				134BCF2220EBD5FB001FC370 /* MapViewController.swift in Sources */,
