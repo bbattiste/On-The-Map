@@ -31,8 +31,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
             }
         }
-        
-        
     }
     
     override func viewDidLoad() {

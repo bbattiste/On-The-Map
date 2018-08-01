@@ -16,13 +16,13 @@ class TableViewController: UITableViewController {
         
         getStudentLocations() { (success, error) in
             if success {
+                // Proceed
             } else {
                 performUIUpdatesOnMain {
                     self.displayError(error!)
                 }
             }
         }
-        
     }
     
     override func viewDidLoad() {

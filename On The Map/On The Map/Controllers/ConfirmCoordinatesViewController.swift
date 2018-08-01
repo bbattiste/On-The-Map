@@ -24,12 +24,36 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     }
     @IBAction func submit() {
         if StudentModel.StudentInformation.IsOnTheMap {
-            updateStudentLocation()
+            updateStudentLocation() { (success, error) in
+                if success {
+                    // Proceed
+                } else {
+                    performUIUpdatesOnMain {
+                        self.displayError(error!)
+                    }
+                }
+            }
         } else {
-            postNewStudentLocation()
+            postNewStudentLocation() { (success, error) in
+                if success {
+                    // Proceed
+                } else {
+                    performUIUpdatesOnMain {
+                        self.displayError(error!)
+                    }
+                }
+            }
         }
         
         presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func displayError(_ error: String) {
+        let alert = UIAlertController(title: "Alert", message: "\(error)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: Vars/Lets
@@ -87,84 +111,6 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         performUIUpdatesOnMain {
             self.mapView.addAnnotations(annotations)
         }
-    }
-    
-    func postNewStudentLocation() {
-        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
-        request.httpMethod = "POST"
-        request.addValue(Constants.UdacityParameterValues.ApplicationID, forHTTPHeaderField: Constants.UdacityParameterKeys.ApplicationIDKey)
-        request.addValue(Constants.UdacityParameterValues.ApiKeyValue, forHTTPHeaderField: Constants.UdacityParameterKeys.ApiKey)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.UdacityResponseValues.AccountKey)\", \"firstName\": \"\(StudentModel.StudentInformation.FirstName)\", \"lastName\": \"\(StudentModel.StudentInformation.LastName)\",\"mapString\": \"\(StudentModel.StudentInformation.MapString)\", \"mediaURL\": \"\(StudentModel.StudentInformation.MediaURL)\",\"latitude\": \(StudentModel.StudentInformation.Latitude), \"longitude\": \(StudentModel.StudentInformation.Longitude)}".data(using: .utf8)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-            
-            func displayError(_ error: String) {
-                let alert = UIAlertController(title: "Alert", message: "Error: Posting of Location has failed", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                    NSLog("The \"OK\" alert occured.")
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }
-            
-            // Guard: was there an error?
-            guard (error == nil) else {
-                displayError("There was an error with your request: \(String(describing: error))")
-                return
-            }
-            // Guard: Is there a succesful HTTP 2XX response?
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                displayError("Your request returned a status code other than 2xx! Code# \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
-                return
-            }
-            // Guard: any data returned?
-            guard let data = data else {
-                displayError("No data was returned!")
-                return
-            }
-        }
-        task.resume()
-    }
-    
-    func updateStudentLocation() {
-        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(StudentModel.StudentInformation.ObjectId)"
-        let url = URL(string: urlString)
-        var request = URLRequest(url: url!)
-        request.httpMethod = "PUT"
-        request.addValue(Constants.UdacityParameterValues.ApplicationID, forHTTPHeaderField: Constants.UdacityParameterKeys.ApplicationIDKey)
-        request.addValue(Constants.UdacityParameterValues.ApiKeyValue, forHTTPHeaderField: Constants.UdacityParameterKeys.ApiKey)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.UdacityResponseValues.AccountKey)\", \"firstName\": \"\(StudentModel.StudentInformation.FirstName)\", \"lastName\": \"\(StudentModel.StudentInformation.LastName)\",\"mapString\": \"\(StudentModel.StudentInformation.MapString)\", \"mediaURL\": \"\(StudentModel.StudentInformation.MediaURL)\",\"latitude\": \(StudentModel.StudentInformation.Latitude), \"longitude\": \(StudentModel.StudentInformation.Longitude)}".data(using: .utf8)
-        
-        /* 4. Make the request */
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-            
-            func displayError(_ error: String) {
-                let alert = UIAlertController(title: "Alert", message: "Error: Posting of Location has failed", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                    NSLog("The \"OK\" alert occured.")
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }
-            
-            // Guard: was there an error?
-            guard (error == nil) else {
-                displayError("There was an error with your request: \(String(describing: error))")
-                return
-            }
-            // Guard: Is there a succesful HTTP 2XX response?
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                displayError("Your request returned a status code other than 2xx! Code# \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
-                return
-            }
-            // Guard: any data returned?
-            guard let data = data else {
-                displayError("No data was returned!")
-                return
-            }
-        }
-        task.resume()
     }
     
     // The following code is to make visual changes to the pin: Is incomplete, but can come back to if needed
