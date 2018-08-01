@@ -27,9 +27,12 @@ func deleteSession() {
     let session = URLSession.shared
     let task = session.dataTask(with: request) { data, response, error in
         
-        // if error occurs, print it and re-enable the UI
         func displayError(_ error: String) {
-            print(error)
+            let alert = UIAlertController(title: "Alert", message: "Error deleting session \(error)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
         
         // Guard: was there an error?
@@ -50,8 +53,6 @@ func deleteSession() {
         
         let range = Range(5..<data.count)
         let newData = data.subdata(in: range) /* subset response data! */
-        print(String(data: newData, encoding: .utf8)!)
-        print("***Logout Success***")
     }
     task.resume()
 }
@@ -67,9 +68,12 @@ func getStudentLocations() {
     let session = URLSession.shared
     let task = session.dataTask(with: request) { data, response, error in
         
-        // if error occurs, print it and re-enable the UI
         func displayError(_ error: String) {
-            print(error)
+            let alert = UIAlertController(title: "Alert", message: "Error getting student locations \(error)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
         
         // Guard: was there an error?
@@ -157,7 +161,6 @@ func postSession(completionHandler: @escaping (_ success: Bool, _ error: String?
         
         // Guard: Is there a succesful HTTP 2XX response?
         guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-            print("Your request returned a status code other than 2xx! \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
             if (response as? HTTPURLResponse)?.statusCode == 403 {
                 completionHandler(false, "Username or Password Incorrect")
             } else {
@@ -180,7 +183,6 @@ func postSession(completionHandler: @escaping (_ success: Bool, _ error: String?
         do {
             parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String:AnyObject]
         } catch {
-            print("Could not parse the data as JSON: '\(String(data: newData, encoding: .utf8)!)'")
             completionHandler(false, "Could not parse the data as JSON")
             return
         }
@@ -188,15 +190,11 @@ func postSession(completionHandler: @escaping (_ success: Bool, _ error: String?
         /* 6. Use the data */
         
         guard let account = parsedResult["account"] as? [String: AnyObject] else {
-            print("Cannot find key 'account'")
             completionHandler(false, "Cannot find key 'account' in \(parsedResult)")
             return
         }
         
         Constants.UdacityResponseValues.AccountKey = account["key"] as! String
-        
-        print("***login success***")
-        print("Constants.UdacityResponseValues.AccountKey = \(Constants.UdacityResponseValues.AccountKey)")
         completionHandler(true, nil)
     }
     task.resume()

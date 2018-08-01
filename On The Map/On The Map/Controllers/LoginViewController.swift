@@ -70,14 +70,10 @@ class LoginViewController: UIViewController {
         }
     }
     
-    //if error occurs, print it and re-enable the UI
     func displayError(_ error: String){
         performUIUpdatesOnMain {
-            print(error)
-            performUIUpdatesOnMain {
-                self.setUIEnabled(true)
-                self.debugTextLabel.text = error
-            }
+            self.setUIEnabled(true)
+            self.debugTextLabel.text = error
         }
     }
 

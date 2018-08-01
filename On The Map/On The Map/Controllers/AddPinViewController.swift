@@ -38,9 +38,12 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             
-            // if error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
-                print(error)
+                let alert = UIAlertController(title: "Alert", message: "Error getting public user data", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
             
             // Guard: was there an error?
@@ -93,9 +96,12 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             
-            // if error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
-                print(error)
+                let alert = UIAlertController(title: "Alert", message: "Error: Check if Student is on the Map has failed", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
             
             // Guard: was there an error?
@@ -131,11 +137,9 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             }
             
             if results.isEmpty == true {
-                print("no results")
                 Constants.StudentInformation.IsOnTheMap = false
                 return
             } else {
-                print("yes array")
                 Constants.StudentInformation.IsOnTheMap = true
                 let student = results[0] as [String: AnyObject]
                 Constants.StudentInformation.ObjectId = student["objectId"] as! String
@@ -149,19 +153,17 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         var geocoder = CLGeocoder()
         geocoder.geocodeAddressString(self.locationTextField.text!) { (placemark, error) in
             
-            // if error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
-                print(error)
-            }
-            
-            // Guard: was there an error?
-            guard (error == nil) else {
-                displayError("There was an error with your request: \(String(describing: error))")
                 let alert = UIAlertController(title: "Alert", message: "Invalid Location", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
                     NSLog("The \"OK\" alert occured.")
                 }))
                 self.present(alert, animated: true, completion: nil)
+            }
+            
+            // Guard: was there an error?
+            guard (error == nil) else {
+                displayError("There was an error with your request: \(String(describing: error))")
                 return
             }
             
@@ -170,8 +172,6 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                 displayError("No placemark")
                 return
             }
-            
-            
             
             // Configure website
             self.websiteTextField.text! = self.checkWebsite(website: self.websiteTextField.text!)

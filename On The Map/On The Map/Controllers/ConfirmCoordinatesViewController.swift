@@ -19,31 +19,11 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var activityIndicatorCoord: UIActivityIndicatorView!
     let pinLocation = CLLocation(latitude: Constants.StudentInformation.Latitude, longitude: Constants.StudentInformation.Longitude)
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.activityIndicatorCoord.transform = CGAffineTransform(scaleX: 2, y: 2)
-        activityIndicatorCoord.startAnimating()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        createAnnotations()
-        mapView.showsUserLocation = true
-        centerMapOnLocation(location: pinLocation)
-        activityIndicatorCoord.stopAnimating()
-        performUIUpdatesOnMain {
-//            self.activityIndicatorStop()
-            self.activityIndicatorCoord.stopAnimating()
-        }
-    }
-
     @IBAction func cancel() {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func submit() {
-        print("Constants.StudentInformation.IsOnTheMap: \(Constants.StudentInformation.IsOnTheMap)")
-        
         if Constants.StudentInformation.IsOnTheMap {
             self.updateStudentLocation()
         } else {
@@ -53,6 +33,19 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.activityIndicatorCoord.transform = CGAffineTransform(scaleX: 2, y: 2)
+        activityIndicatorCoord.startAnimating()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        createAnnotations()
+        mapView.showsUserLocation = true
+        centerMapOnLocation(location: pinLocation)
+        activityIndicatorCoord.stopAnimating()
+    }
+    
+    //    MapViewController.delegate = self
     // Configure zoom on pinLocation
     func centerMapOnLocation(location: CLLocation) {
         let regionRadius: CLLocationDistance = 2000
@@ -86,8 +79,6 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
             let lat = CLLocationDegrees(Constants.StudentInformation.Latitude)
             let long = CLLocationDegrees(Constants.StudentInformation.Longitude)
         
-        print("**** lat = \(String(describing: lat)) +++ long = \(String(describing: long))")
-        
             // Lat and long are used to create a CLLocationCoordinates2D instance.
             let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         
@@ -110,6 +101,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
 //            self.activityIndicatorStop()
             self.activityIndicatorCoord.stopAnimating()
         }
+        self.activityIndicatorCoord.stopAnimating()
     }
     
     // This changes changes the view of the pin and mediaURL
@@ -142,9 +134,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             
-            // if error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
-                print(error)
                 let alert = UIAlertController(title: "Alert", message: "Error: Posting of Location has failed", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
                     NSLog("The \"OK\" alert occured.")
@@ -167,7 +157,6 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
                 displayError("No data was returned!")
                 return
             }
-            print(String(data: data, encoding: .utf8)!)
         }
         task.resume()
     }
@@ -186,9 +175,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             
-            // if error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
-                print(error)
                 let alert = UIAlertController(title: "Alert", message: "Error: Posting of Location has failed", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
                     NSLog("The \"OK\" alert occured.")
@@ -211,7 +198,6 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
                 displayError("No data was returned!")
                 return
             }
-            print(String(data: data, encoding: .utf8)!)
         }
         task.resume()
     }

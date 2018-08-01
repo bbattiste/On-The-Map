@@ -50,7 +50,6 @@ class TableViewController: UITableViewController {
 //        let session = URLSession.shared
 //        let task = session.dataTask(with: request) { data, response, error in
 //
-//            // if error occurs, print it and re-enable the UI
 //            func displayError(_ error: String) {
 //                print(error)
 //            }

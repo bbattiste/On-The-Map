@@ -54,9 +54,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             
-            // if error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
-                print(error)
                 let alert = UIAlertController(title: "Alert", message: error, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
                     NSLog("The \"OK\" alert occured.")
@@ -66,7 +64,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             // Guard: was there an error?
             guard (error == nil) else {
-                displayError("There was an error with your request: \(String(describing: error))")
+                displayError("There was an error with getting Student Locations: \(String(describing: error))")
                 return
             }
             // Guard: Is there a succesful HTTP 2XX response?
