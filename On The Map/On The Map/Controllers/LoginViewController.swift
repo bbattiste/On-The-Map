@@ -58,9 +58,11 @@ class LoginViewController: UIViewController {
             if success {
                 self.completeLogin()
             } else {
-                self.displayError(error!)
-                self.loginButton.isEnabled = true
-                self.activityIndicatorLogin.stopAnimating()
+                performUIUpdatesOnMain {
+                    self.displayError(error!)
+                    self.loginButton.isEnabled = true
+                    self.activityIndicatorLogin.stopAnimating()
+                }
             }
         }
     }
