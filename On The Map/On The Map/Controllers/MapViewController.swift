@@ -17,8 +17,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var activityIndicatorMap: UIActivityIndicatorView!
     
     override func viewWillAppear(_ animated: Bool) {
-        self.activityIndicatorMap.transform = CGAffineTransform(scaleX: 2, y: 2)
-//        self.activityIndicatorStart()
+        self.activityIndicatorMap.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         activityIndicatorMap.startAnimating()
         self.getStudentLocations()
     }
@@ -198,22 +197,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-    
-//    func activityIndicatorStart() {
-//
-//        activityIndicator.center = self.view.center
-//        activityIndicator.hidesWhenStopped = true
-//        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-//        view.addSubview(activityIndicator)
-//
-//        activityIndicator.startAnimating()
-//        //UIApplication.shared.beginIgnoringInteractionEvents()
-//    }
-    
-//    func activityIndicatorStop() {
-//        activityIndicator.stopAnimating()
-//        //UIApplication.shared.endIgnoringInteractionEvents()
-//    }
     
     //MARK: Go To Add Pin View
     @objc func addPin() {

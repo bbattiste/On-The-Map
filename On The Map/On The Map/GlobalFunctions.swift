@@ -28,11 +28,12 @@ func deleteSession() {
     let task = session.dataTask(with: request) { data, response, error in
         
         func displayError(_ error: String) {
-            let alert = UIAlertController(title: "Alert", message: "Error deleting session \(error)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                NSLog("The \"OK\" alert occured.")
-            }))
-            self.present(alert, animated: true, completion: nil)
+//            TODO
+//            let alert = UIAlertController(title: "Alert", message: "Error deleting session \(error)", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+//                NSLog("The \"OK\" alert occured.")
+//            }))
+//            self.present(alert, animated: true, completion: nil)
         }
         
         // Guard: was there an error?
@@ -51,6 +52,7 @@ func deleteSession() {
             return
         }
         
+        // Results if needed
         let range = Range(5..<data.count)
         let newData = data.subdata(in: range) /* subset response data! */
     }
@@ -69,11 +71,12 @@ func getStudentLocations() {
     let task = session.dataTask(with: request) { data, response, error in
         
         func displayError(_ error: String) {
-            let alert = UIAlertController(title: "Alert", message: "Error getting student locations \(error)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                NSLog("The \"OK\" alert occured.")
-            }))
-            self.present(alert, animated: true, completion: nil)
+//            TODO
+//            let alert = UIAlertController(title: "Alert", message: "Error getting student locations \(error)", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+//                NSLog("The \"OK\" alert occured.")
+//            }))
+//            self.present(alert, animated: true, completion: nil)
         }
         
         // Guard: was there an error?

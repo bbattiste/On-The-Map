@@ -16,6 +16,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var websiteTextField: UITextField!
+    @IBOutlet weak var activityIndicatorAddPin: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -150,6 +151,8 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func getLatLong() {
         
+        self.activityIndicatorAddPin.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        self.activityIndicatorAddPin.startAnimating()
         var geocoder = CLGeocoder()
         geocoder.geocodeAddressString(self.locationTextField.text!) { (placemark, error) in
             
@@ -159,6 +162,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                     NSLog("The \"OK\" alert occured.")
                 }))
                 self.present(alert, animated: true, completion: nil)
+                self.activityIndicatorAddPin.stopAnimating()
             }
             
             // Guard: was there an error?
@@ -173,20 +177,8 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             
-            // Configure website
+            // Store Lat/long/textFields
             self.websiteTextField.text! = self.checkWebsite(website: self.websiteTextField.text!)
-            
-//            //check if URL contains "https://"
-//            guard self.websiteTextField.text!.contains("https://") else {
-//                displayError("Website Must Contain 'https://'")
-//                let alert = UIAlertController(title: "Alert", message: "Website Must Contain 'https://'", preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-//                    NSLog("The \"OK\" alert occured.")
-//                }))
-//                self.present(alert, animated: true, completion: nil)
-//                return
-//            }
-            
             var coordinateParse: CLLocation?
             coordinateParse = location.first?.location
             if let coordinateParse = coordinateParse {
@@ -199,6 +191,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "ConfirmCoordinatesViewController") as! ConfirmCoordinatesViewController
             self.present(controller, animated: true, completion: nil)
+            self.activityIndicatorAddPin.stopAnimating()
         }
     }
     

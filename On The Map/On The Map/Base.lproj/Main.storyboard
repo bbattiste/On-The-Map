@@ -91,9 +91,18 @@
                                     <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y6e-mB-6gV"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="p86-3Q-jGn">
+                                <rect key="frame" x="157" y="313.5" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="d8Y-uK-MxJ"/>
+                                    <constraint firstAttribute="height" constant="60" id="ps9-f3-jfm"/>
+                                </constraints>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="p86-3Q-jGn" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="0c8-Hx-C9l"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yNY-cJ-JfV" secondAttribute="trailing" constant="141" id="1jo-Yu-htU"/>
                             <constraint firstItem="HAj-dW-qvd" firstAttribute="centerX" secondItem="Jq5-yf-zuc" secondAttribute="centerX" id="3yW-sr-nlq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jq5-yf-zuc" secondAttribute="trailing" constant="73" id="4jx-46-roT"/>
@@ -117,6 +126,7 @@
                             <constraint firstItem="yNY-cJ-JfV" firstAttribute="top" secondItem="ieX-wP-DJs" secondAttribute="bottom" constant="8" id="g5q-yW-kXm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YGo-wa-cIq" secondAttribute="trailing" constant="16" id="g61-f5-rZ9"/>
                             <constraint firstItem="YGo-wa-cIq" firstAttribute="top" secondItem="9Eb-Ro-IfA" secondAttribute="bottom" constant="8" id="hF8-2u-LQr"/>
+                            <constraint firstItem="p86-3Q-jGn" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hjB-d6-BYt"/>
                             <constraint firstItem="HKm-7K-Ht9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ijd-ad-M4Y"/>
                             <constraint firstItem="Jq5-yf-zuc" firstAttribute="top" secondItem="yNY-cJ-JfV" secondAttribute="bottom" constant="8" id="mgq-g0-UMr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="S4b-51-fRb" secondAttribute="trailing" constant="16" id="qAO-cb-Wxw"/>
@@ -131,6 +141,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="activityIndicatorLogin" destination="p86-3Q-jGn" id="D1a-4W-la3"/>
                         <outlet property="debugTextLabel" destination="HKm-7K-Ht9" id="Nxi-Rb-dV3"/>
                         <outlet property="loginButton" destination="yNY-cJ-JfV" id="4No-Mq-epJ"/>
                         <outlet property="passwordTextField" destination="ieX-wP-DJs" id="84B-Rh-DZl"/>
@@ -212,9 +223,18 @@
                                     <action selector="getLatLong" destination="w8A-r8-VIH" eventType="touchUpInside" id="SmP-Sb-qty"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="yJ6-IM-1Nv">
+                                <rect key="frame" x="157" y="313.5" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="hbw-SE-k8C"/>
+                                    <constraint firstAttribute="width" constant="60" id="rJu-WN-3yh"/>
+                                </constraints>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="yJ6-IM-1Nv" firstAttribute="centerX" secondItem="XGf-iE-Nrf" secondAttribute="centerX" id="0ig-9v-gAh"/>
                             <constraint firstItem="BVt-m9-QcA" firstAttribute="top" secondItem="ddr-vG-GAe" secondAttribute="bottom" constant="8" id="0qI-XS-cp9"/>
                             <constraint firstItem="ddr-vG-GAe" firstAttribute="top" secondItem="tjt-A2-gl2" secondAttribute="bottom" constant="8" id="2g9-lW-eex"/>
                             <constraint firstItem="Hh3-5E-scP" firstAttribute="top" secondItem="B6v-0b-B8N" secondAttribute="bottom" constant="41" id="7zS-Zi-rvk"/>
@@ -227,6 +247,7 @@
                             <constraint firstItem="B6v-0b-B8N" firstAttribute="trailing" secondItem="XGf-iE-Nrf" secondAttribute="trailing" id="WIu-Af-CkS"/>
                             <constraint firstItem="XGf-iE-Nrf" firstAttribute="trailing" secondItem="tjt-A2-gl2" secondAttribute="trailing" constant="16" id="Y7k-LO-D7l"/>
                             <constraint firstItem="tjt-A2-gl2" firstAttribute="top" secondItem="Hh3-5E-scP" secondAttribute="bottom" constant="66" id="gyu-zc-CH4"/>
+                            <constraint firstItem="yJ6-IM-1Nv" firstAttribute="centerY" secondItem="XGf-iE-Nrf" secondAttribute="centerY" id="hjv-AS-HNs"/>
                             <constraint firstItem="XGf-iE-Nrf" firstAttribute="trailing" secondItem="ddr-vG-GAe" secondAttribute="trailing" constant="16" id="jW6-7S-gQV"/>
                             <constraint firstItem="CDw-ky-uzb" firstAttribute="top" secondItem="XGf-iE-Nrf" secondAttribute="top" id="llp-1o-JWW"/>
                             <constraint firstItem="BVt-m9-QcA" firstAttribute="leading" secondItem="XGf-iE-Nrf" secondAttribute="leading" constant="16" id="rdA-qs-wmc"/>
@@ -236,6 +257,7 @@
                         <viewLayoutGuide key="safeArea" id="XGf-iE-Nrf"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicatorAddPin" destination="yJ6-IM-1Nv" id="dqk-mD-XJJ"/>
                         <outlet property="cancelButton" destination="Wjg-5a-8JH" id="BLN-Bs-Kdw"/>
                         <outlet property="locationTextField" destination="tjt-A2-gl2" id="7MF-Xf-pp1"/>
                         <outlet property="navBar" destination="CDw-ky-uzb" id="SlP-ad-UcQ"/>
@@ -430,7 +452,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kgB-PH-ZCN" id="9Vt-Tj-zuF">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

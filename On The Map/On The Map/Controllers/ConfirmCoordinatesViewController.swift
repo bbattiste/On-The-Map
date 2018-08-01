@@ -34,7 +34,7 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.activityIndicatorCoord.transform = CGAffineTransform(scaleX: 2, y: 2)
+        self.activityIndicatorCoord.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         activityIndicatorCoord.startAnimating()
     }
     

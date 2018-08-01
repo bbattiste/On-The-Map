@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var debugTextLabel: UILabel!
+    @IBOutlet weak var activityIndicatorLogin: UIActivityIndicatorView!
     
     // Lock phone orientation
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -37,6 +38,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func login(_ sender: AnyObject) {
         
+        self.activityIndicatorLogin.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        self.activityIndicatorLogin.startAnimating()
         self.loginButton.isEnabled = false
         
         debugTextLabel.text = ""
@@ -44,6 +47,7 @@ class LoginViewController: UIViewController {
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             debugTextLabel.text = "Username or Password Empty"
             self.loginButton.isEnabled = true
+            self.activityIndicatorLogin.stopAnimating()
             return
         } else {
             Constants.UdacityParameterValues.Username = usernameTextField.text!
@@ -56,6 +60,7 @@ class LoginViewController: UIViewController {
             } else {
                 self.displayError(error!)
                 self.loginButton.isEnabled = true
+                self.activityIndicatorLogin.stopAnimating()
             }
         }
     }
@@ -67,6 +72,7 @@ class LoginViewController: UIViewController {
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapsTabBarController") as! UITabBarController
             self.present(controller, animated: true, completion: nil)
             self.loginButton.isEnabled = true
+            self.activityIndicatorLogin.stopAnimating()
         }
     }
     
