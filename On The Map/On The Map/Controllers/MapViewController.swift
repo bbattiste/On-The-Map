@@ -14,11 +14,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
-    var activityIndicator = UIActivityIndicatorView()
+    @IBOutlet weak var activityIndicatorMap: UIActivityIndicatorView!
     
     override func viewWillAppear(_ animated: Bool) {
-        self.activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
-        self.activityIndicatorStart()
+        self.activityIndicatorMap.transform = CGAffineTransform(scaleX: 2, y: 2)
+//        self.activityIndicatorStart()
+        activityIndicatorMap.startAnimating()
         self.getStudentLocations()
     }
     
@@ -39,7 +40,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // create/Add Logout button to left nav bar:
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: UIBarButtonItemStyle(rawValue: 2)!, target: self, action: #selector(MapViewController.logOut))
         
-        self.activityIndicatorStop()
+        activityIndicatorMap.stopAnimating()
     }
     
     func getStudentLocations() {
@@ -200,21 +201,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func activityIndicatorStart() {
-        
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        view.addSubview(activityIndicator)
-        
-        activityIndicator.startAnimating()
-        //UIApplication.shared.beginIgnoringInteractionEvents()
-    }
+//    func activityIndicatorStart() {
+//
+//        activityIndicator.center = self.view.center
+//        activityIndicator.hidesWhenStopped = true
+//        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+//        view.addSubview(activityIndicator)
+//
+//        activityIndicator.startAnimating()
+//        //UIApplication.shared.beginIgnoringInteractionEvents()
+//    }
     
-    func activityIndicatorStop() {
-        activityIndicator.stopAnimating()
-        //UIApplication.shared.endIgnoringInteractionEvents()
-    }
+//    func activityIndicatorStop() {
+//        activityIndicator.stopAnimating()
+//        //UIApplication.shared.endIgnoringInteractionEvents()
+//    }
     
     //MARK: Go To Add Pin View
     @objc func addPin() {

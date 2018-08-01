@@ -16,12 +16,12 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    var activityIndicator = UIActivityIndicatorView()
+    @IBOutlet weak var activityIndicatorCoord: UIActivityIndicatorView!
     let pinLocation = CLLocation(latitude: Constants.StudentInformation.Latitude, longitude: Constants.StudentInformation.Longitude)
     
     override func viewWillAppear(_ animated: Bool) {
-        self.activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
-        self.activityIndicatorStart()
+        self.activityIndicatorCoord.transform = CGAffineTransform(scaleX: 2, y: 2)
+        activityIndicatorCoord.startAnimating()
     }
     
     override func viewDidLoad() {
@@ -30,8 +30,10 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         createAnnotations()
         mapView.showsUserLocation = true
         centerMapOnLocation(location: pinLocation)
+        activityIndicatorCoord.stopAnimating()
         performUIUpdatesOnMain {
-            self.activityIndicatorStop()
+//            self.activityIndicatorStop()
+            self.activityIndicatorCoord.stopAnimating()
         }
     }
 
@@ -59,21 +61,21 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    func activityIndicatorStart() {
-        
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        view.addSubview(activityIndicator)
-        
-        activityIndicator.startAnimating()
-        //UIApplication.shared.beginIgnoringInteractionEvents()
-    }
+//    func activityIndicatorStart() {
+//
+//        activityIndicator.center = self.view.center
+//        activityIndicator.hidesWhenStopped = true
+//        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+//        view.addSubview(activityIndicator)
+//
+//        activityIndicator.startAnimating()
+//        //UIApplication.shared.beginIgnoringInteractionEvents()
+//    }
     
-    func activityIndicatorStop() {
-        activityIndicator.stopAnimating()
-        //UIApplication.shared.endIgnoringInteractionEvents()
-    }
+//    func activityIndicatorStop() {
+//        activityIndicator.stopAnimating()
+//        //UIApplication.shared.endIgnoringInteractionEvents()
+//    }
     
     func createAnnotations() {
         
@@ -105,7 +107,8 @@ class ConfirmCoordinatesViewController: UIViewController, MKMapViewDelegate {
         // add the annotations to the map.
         performUIUpdatesOnMain {
             self.mapView.addAnnotations(annotations)
-            self.activityIndicatorStop()
+//            self.activityIndicatorStop()
+            self.activityIndicatorCoord.stopAnimating()
         }
     }
     
