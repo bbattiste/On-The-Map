@@ -94,14 +94,14 @@ func getStudentLocations(completionHandler: @escaping (_ success: Bool, _ error:
             completionHandler(false, "Could not parse student locations data as JSON")
             return
         }
-        
+        print("parsedResult = \(parsedResult)")
         /* 6. Use the data */
         
         guard let rawStudentLocations = parsedResult["results"] as? [[String: AnyObject]] else {
             completionHandler(false, "Cannot find key 'results' in student locations")
             return
         }
-        
+        print("rawStudentLocations = \(rawStudentLocations)")
         //TODO?: may want to put in a constant var that decides if incomplete student still gets pin, but will not follow links?
         //Check if all data we need is there
         var studentLocations = [[String: AnyObject]]()
@@ -237,6 +237,7 @@ func GetPublicUserData(completionHandler: @escaping (_ success: Bool, _ error: S
             return
         }
         
+        // TODO: I think udacity updated privacy of students to only give out "nickname"
         StudentModel.StudentInformation.LastName = user["last_name"] as! String
         StudentModel.StudentInformation.FirstName = user["first_name"] as! String
         completionHandler(true, nil)
