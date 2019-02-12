@@ -14,8 +14,8 @@ class LoginViewController: UIViewController {
     // MARK: Outlets and variables
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var usernameTextField: ShakeTextField!
+    @IBOutlet weak var passwordTextField: ShakeTextField!
     @IBOutlet weak var debugTextLabel: UILabel!
     @IBOutlet weak var activityIndicatorLogin: UIActivityIndicatorView!
     
@@ -26,6 +26,12 @@ class LoginViewController: UIViewController {
         } else {
             return .portrait
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     // Link sign up button with
@@ -46,6 +52,8 @@ class LoginViewController: UIViewController {
         
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             debugTextLabel.text = "Username or Password Empty"
+            usernameTextField.errorShake()
+            passwordTextField.errorShake()
             loginButton.isEnabled = true
             activityIndicatorLogin.stopAnimating()
             return
@@ -109,6 +117,7 @@ extension LoginViewController: UITextFieldDelegate {
         resignIfFirstResponder(usernameTextField)
         resignIfFirstResponder(passwordTextField)
     }
+    
 }
 // MARK: - LoginViewController (Configure UI)
 
